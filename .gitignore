@@ -1,0 +1,49 @@
+venv/
+**/venv/
+node_modules/
+**/node_modules/
+__pycache__/
+**/__pycache__/
+.pytest_cache/
+.git/
+*.pth
+*.pt
+*.bin
+*.safetensors
+*.ckpt
+*.onnx
+uploads/
+**/uploads/
+Datasets/
+datasets/
+**/Datasets/
+**/datasets/
+.env
+*.zip
+
+# Large project directories - excluded from GitHub
+models/
+data/
+data_new/
+final_package/
+experiments/
+predictions/
+logs/
+reports/
+legacy/
+DEPLOY_PACKAGE/
+
+# Backend local files
+web_app/backend/venv/
+web_app/backend/uploads/
+web_app/backend/__pycache__/
+web_app/backend/data/
+
+# Frontend generated files
+web_app/frontend/node_modules/
+web_app/frontend/dist/
+
+# Backup files - keep locally, do not upload
+**/*backup*
+**/*before_*
+**/*_backup.*
