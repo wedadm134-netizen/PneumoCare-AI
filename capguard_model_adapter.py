@@ -14,7 +14,8 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 # CAPGuard AI — Production Model Adapter V1
 # ============================================================
 
-PROJECT = r"C:\Users\hp\Desktop\CAPGuard-AI"
+PROJECT = os.path.dirname(os.path.abspath(__file__))
+MODEL_ROOT = PROJECT
 
 DEVICE = torch.device("cpu")
 
@@ -23,32 +24,30 @@ DEVICE = torch.device("cpu")
 # PATHS
 # ============================================================
 
-RESNET_PATH = os.path.expanduser(
-    r"~\.cache\torch\hub\checkpoints\resnet50-11ad3fa6.pth"
-)
+RESNET_PATH = os.getenv('RESNET_PATH', os.path.join(PROJECT, 'DEPLOY_PACKAGE', 'models', 'resnet50-11ad3fa6.pth'))
 
 XRAY_CHECKPOINT = os.path.join(
-    PROJECT,
+    MODEL_ROOT,
     r"models\XRay_Branch_V1\model\best_image_classifier.pt"
 )
 
 CLINICAL_BERT_DIR = os.path.join(
-    PROJECT,
+    MODEL_ROOT,
     r"models\clin_note_v4\clinical_bert_v4_final"
 )
 
 VITAL_MODEL_PATH = os.path.join(
-    PROJECT,
+    MODEL_ROOT,
     r"models\vital_fuse\C_Early_Plus_Imaging.json"
 )
 
 VITAL_PREPROCESSOR_PATH = os.path.join(
-    PROJECT,
+    MODEL_ROOT,
     r"models\vital_fuse\C_Early_Plus_Imaging_preprocessor.joblib"
 )
 
 FUSION_CONFIG_PATH = os.path.join(
-    PROJECT,
+    MODEL_ROOT,
     r"models\evidence_fuse_v4\evidence_fuse_v4_config.json"
 )
 
@@ -689,3 +688,5 @@ if __name__ == "__main__":
 
     print()
     print("ALL MODEL COMPONENTS LOADED SUCCESSFULLY.")
+
+

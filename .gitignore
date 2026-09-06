@@ -47,3 +47,4 @@ web_app/frontend/dist/
 **/*backup*
 **/*before_*
 **/*_backup.*
+cbc_data_pediatric_cleaned.csv
