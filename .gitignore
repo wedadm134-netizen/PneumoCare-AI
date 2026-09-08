@@ -1,4 +1,4 @@
-venv/
+﻿venv/
 **/venv/
 node_modules/
 **/node_modules/
@@ -31,8 +31,7 @@ predictions/
 logs/
 reports/
 legacy/
-DEPLOY_PACKAGE/
-
+DEPLOY_PACKAGE/*`r`n!DEPLOY_PACKAGE/backend/`r`nDEPLOY_PACKAGE/backend/*`r`n!DEPLOY_PACKAGE/backend/main.py`r`n!DEPLOY_PACKAGE/backend/requirements.txt`r`n!DEPLOY_PACKAGE/backend/download_models.py
 # Backend local files
 web_app/backend/venv/
 web_app/backend/uploads/
@@ -48,3 +47,8 @@ web_app/frontend/dist/
 **/*before_*
 **/*_backup.*
 cbc_data_pediatric_cleaned.csv
+
+HF_PRODUCTION_UPLOAD/
+DEPLOY_PACKAGE/backend/HF_UPLOAD_ENV/
+DEPLOY_PACKAGE/backend/patch_*.py
+DEPLOY_PACKAGE/backend/openapi.json

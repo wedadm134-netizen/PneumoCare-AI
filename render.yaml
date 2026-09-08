@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: pneumocare-ai-backend
+    runtime: python
+    rootDir: DEPLOY_PACKAGE/backend
+
+    buildCommand: |
+      pip install --upgrade pip
+      pip install -r requirements.txt
+      python download_models.py
+
+    startCommand: |
+      uvicorn main:app --host 0.0.0.0 --port $PORT
+
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.11
+
+      - key: GEMINI_MODEL
+        value: gemini-3.5-flash-lite
+
+      - key: GEMINI_API_KEY
+        sync: false
+
+      - key: HF_TOKEN
+        sync: false
