@@ -1,3 +1,4 @@
+﻿from pathlib import Path
 import os
 import json
 import joblib
@@ -11,7 +12,7 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 
 # ============================================================
-# CAPGuard AI — Production Model Adapter V1
+# CAPGuard AI â€” Production Model Adapter V1
 # ============================================================
 
 PROJECT = os.path.dirname(os.path.abspath(__file__))
@@ -24,7 +25,7 @@ DEVICE = torch.device("cpu")
 # PATHS
 # ============================================================
 
-RESNET_PATH = Path(os.getenv("RESNET_PATH", str(MODEL_ROOT / "models" / "resnet50-11ad3fa6.pth")))
+RESNET_PATH = os.getenv("RESNET_PATH", os.path.join(MODEL_ROOT, "models", "resnet50-11ad3fa6.pth"))
 
 XRAY_CHECKPOINT = os.path.join(
     MODEL_ROOT,
@@ -154,7 +155,7 @@ class CAPGuardModelAdapter:
         self.device = DEVICE
 
         print("=" * 70)
-        print("CAPGuard AI — MODEL ADAPTER V1")
+        print("CAPGuard AI â€” MODEL ADAPTER V1")
         print("=" * 70)
 
         self._load_fusion_config()
@@ -688,5 +689,6 @@ if __name__ == "__main__":
 
     print()
     print("ALL MODEL COMPONENTS LOADED SUCCESSFULLY.")
+
 
 
