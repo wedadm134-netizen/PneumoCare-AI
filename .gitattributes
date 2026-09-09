@@ -1,1 +1,2 @@
 DEPLOY_PACKAGE/models/** filter=lfs diff=lfs merge=lfs -text
+DEPLOY_PACKAGE/models/evidence_fuse_v4/evidence_fuse_v4_config.json -filter -diff -merge text

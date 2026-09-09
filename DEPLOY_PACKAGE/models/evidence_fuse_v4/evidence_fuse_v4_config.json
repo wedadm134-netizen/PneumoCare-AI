@@ -1,3 +1,38 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:23dbe81cef437ccdcb57ee5092b17c66535f45f0b7278e9b10adf0a9e614c9f7
-size 1031
+{
+    "project": "CAPGuard AI",
+    "version": "Evidence-Fuse V4",
+    "structured_branch": "VITAL-FUSE",
+    "nlp_branch": "CLIN-NOTE V4",
+    "fusion_method": "weighted_probability_fusion",
+    "lab_weight": 0.27,
+    "nlp_weight": 0.73,
+    "threshold": 0.6650000000000005,
+    "validation": {
+        "accuracy": 0.925,
+        "precision": 1.0,
+        "recall": 0.7272727272727273,
+        "f1": 0.8421052631578947,
+        "roc_auc": 0.8942006269592477,
+        "pr_auc": 0.886122388155881
+    },
+    "test": {
+        "accuracy": 0.9259259259259259,
+        "precision": 0.9,
+        "recall": 0.8181818181818182,
+        "f1": 0.8571428571428571,
+        "specificity": 0.9661016949152542,
+        "roc_auc": 0.9137134052388289,
+        "pr_auc": 0.8866616216887114,
+        "confusion_matrix": [
+            [
+                57,
+                2
+            ],
+            [
+                4,
+                18
+            ]
+        ]
+    },
+    "test_used_for_selection": false
+}
