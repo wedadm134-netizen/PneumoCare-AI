@@ -120,8 +120,6 @@ UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 DB_PATH = DATA_DIR / "capguard.db"
 
-app.mount("/assets", StaticFiles(directory=str(FRONTEND_DIST / "assets")), name="assets")
-app.mount("/static", StaticFiles(directory=str(FRONTEND_DIST)), name="static")
 
 
 # ============================================================
