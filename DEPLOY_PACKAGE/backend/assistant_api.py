@@ -17,7 +17,7 @@ from treatment_engine import generate_treatment_plan
 # ENVIRONMENT
 # ============================================================
 
-load_dotenv()
+load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '.env'))
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 

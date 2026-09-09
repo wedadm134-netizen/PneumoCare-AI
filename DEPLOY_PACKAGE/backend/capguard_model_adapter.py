@@ -1,4 +1,3 @@
-﻿from pathlib import Path
 import os
 import json
 import joblib
@@ -12,7 +11,7 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 
 # ============================================================
-# CAPGuard AI â€” Production Model Adapter V1
+# CAPGuard AI — Production Model Adapter V1
 # ============================================================
 
 PROJECT = os.path.dirname(os.path.abspath(__file__))
@@ -27,29 +26,41 @@ DEVICE = torch.device("cpu")
 
 RESNET_PATH = os.getenv("RESNET_PATH", os.path.join(MODEL_ROOT, "models", "resnet50-11ad3fa6.pth"))
 
+
 XRAY_CHECKPOINT = os.path.join(
     MODEL_ROOT,
-    "models", "XRay_Branch_V1", "model", "best_image_classifier.pt"
+    "models",
+    "XRay_Branch_V1",
+    "model",
+    "best_image_classifier.pt"
 )
 
 CLINICAL_BERT_DIR = os.path.join(
     MODEL_ROOT,
-    "models", "clin_note_v4", "clinical_bert_v4_final"
+    "models",
+    "clin_note_v4",
+    "clinical_bert_v4_final"
 )
 
 VITAL_MODEL_PATH = os.path.join(
     MODEL_ROOT,
-    "models", "vital_fuse", "C_Early_Plus_Imaging.json"
+    "models",
+    "vital_fuse",
+    "C_Early_Plus_Imaging.json"
 )
 
 VITAL_PREPROCESSOR_PATH = os.path.join(
     MODEL_ROOT,
-    "models", "vital_fuse", "C_Early_Plus_Imaging_preprocessor.joblib"
+    "models",
+    "vital_fuse",
+    "C_Early_Plus_Imaging_preprocessor.joblib"
 )
 
 FUSION_CONFIG_PATH = os.path.join(
     MODEL_ROOT,
-    "models", "evidence_fuse_v4", "evidence_fuse_v4_config.json"
+    "models",
+    "evidence_fuse_v4",
+    "evidence_fuse_v4_config.json"
 )
 
 
@@ -118,35 +129,25 @@ VITAL_RAW_FEATURES = [
 # ============================================================
 
 class XRayClassifier(nn.Module):
-
     def __init__(self):
         super().__init__()
-
         self.network = nn.Sequential(
             nn.Linear(2048, 512),
             nn.BatchNorm1d(512),
             nn.ReLU(),
             nn.Dropout(0.3),
-
             nn.Linear(512, 128),
             nn.BatchNorm1d(128),
             nn.ReLU(),
             nn.Dropout(0.3),
-
             nn.Linear(128, 64),
             nn.ReLU(),
             nn.Dropout(0.3),
-
             nn.Linear(64, 2),
         )
-
     def forward(self, x):
         return self.network(x)
 
-
-# ============================================================
-# MAIN ADAPTER
-# ============================================================
 
 class CAPGuardModelAdapter:
 
@@ -154,19 +155,70 @@ class CAPGuardModelAdapter:
 
         self.device = DEVICE
 
-        print("=" * 70)
-        print("CAPGuard AI â€” MODEL ADAPTER V1")
-        print("=" * 70)
+        # Lazy-loading state
+        self._models_loaded = False
+        self._loading = False
 
+        # Load only lightweight fusion configuration
         self._load_fusion_config()
-        self._load_xray()
-        self._load_nlp()
-        self._load_vital()
 
-        print()
-        print("CAPGuard ADAPTER: READY")
+        # Heavy model placeholders
+        self.xray_feature_extractor = None
+        self.xray_classifier = None
+        self.xray_transform = None
+
+        self.tokenizer = None
+        self.nlp_model = None
+
+        self.vital_preprocessor = None
+        self.vital_model = None
+
+        print("=" * 70)
+        print("CAPGuard AI - MODEL ADAPTER V1")
+        print("=" * 70)
+        print("CAPGuard ADAPTER: INITIALIZED")
+        print("Heavy models will load on first inference.")
         print("=" * 70)
 
+    # ========================================================
+    # LAZY MODEL LOADING
+    # ========================================================
+
+    def _ensure_models_loaded(self):
+
+        if self._models_loaded:
+            return
+
+        if self._loading:
+            raise RuntimeError(
+                "CAPGuard models are already being loaded."
+            )
+
+        self._loading = True
+
+        try:
+
+            print("=" * 70)
+            print("CAPGuard AI - Loading production models...")
+            print("=" * 70)
+
+            self._load_xray()
+            self._load_nlp()
+            self._load_vital()
+
+            self._models_loaded = True
+
+            print("CAPGuard ADAPTER: READY")
+            print("=" * 70)
+
+        except Exception:
+
+            self._models_loaded = False
+            raise
+
+        finally:
+
+            self._loading = False
 
     # ========================================================
     # FUSION CONFIG
@@ -199,7 +251,6 @@ class CAPGuardModelAdapter:
         print("NLP WEIGHT:", self.nlp_weight)
         print("VITAL WEIGHT:", self.vital_weight)
         print("THRESHOLD:", self.fusion_threshold)
-
 
     # ========================================================
     # XRAY
@@ -283,7 +334,6 @@ class CAPGuardModelAdapter:
 
         print("[XRAY] Classifier: OK")
 
-
     # ========================================================
     # CLINICALBERT V4
     # ========================================================
@@ -298,10 +348,13 @@ class CAPGuardModelAdapter:
             local_files_only=True
         )
 
-        self.nlp_model = AutoModelForSequenceClassification.from_pretrained(
-            CLINICAL_BERT_DIR,
-            local_files_only=True,
-            num_labels=2
+        self.nlp_model = (
+            AutoModelForSequenceClassification
+            .from_pretrained(
+                CLINICAL_BERT_DIR,
+                local_files_only=True,
+                num_labels=2
+            )
         )
 
         self.nlp_model.to(self.device)
@@ -310,7 +363,6 @@ class CAPGuardModelAdapter:
         print("[NLP] ClinicalBERT V4: OK")
         print("[NLP] Max length: 256")
         print("[NLP] Classes: 2")
-
 
     # ========================================================
     # VITAL-FUSE
@@ -339,12 +391,13 @@ class CAPGuardModelAdapter:
 
         print("[VITAL] XGBoost: OK")
 
-
     # ========================================================
     # XRAY PREDICTION
     # ========================================================
 
     def predict_xray(self, image_path):
+
+        self._ensure_models_loaded()
 
         if not image_path:
             raise ValueError(
@@ -403,14 +456,19 @@ class CAPGuardModelAdapter:
             "feature_dimension": 2048,
         }
 
-
     # ========================================================
     # NLP PREDICTION
     # ========================================================
 
     def predict_nlp(self, clinical_note):
 
-        if not clinical_note or not str(clinical_note).strip():
+        self._ensure_models_loaded()
+
+        if (
+            not clinical_note
+            or not str(clinical_note).strip()
+        ):
+
             raise ValueError(
                 "clinical_note is required for NLP inference."
             )
@@ -464,12 +522,13 @@ class CAPGuardModelAdapter:
             "threshold": 0.65,
         }
 
-
     # ========================================================
     # VITAL PREDICTION
     # ========================================================
 
     def predict_vital(self, vital_data):
+
+        self._ensure_models_loaded()
 
         missing = [
             feature
@@ -478,6 +537,7 @@ class CAPGuardModelAdapter:
         ]
 
         if missing:
+
             raise ValueError(
                 "Missing VITAL features: "
                 + ", ".join(missing)
@@ -495,8 +555,8 @@ class CAPGuardModelAdapter:
             columns=VITAL_RAW_FEATURES
         )
 
-        transformed = self.vital_preprocessor.transform(
-            df
+        transformed = (
+            self.vital_preprocessor.transform(df)
         )
 
         probability = float(
@@ -505,7 +565,9 @@ class CAPGuardModelAdapter:
             )[0][1]
         )
 
-        prediction = probability >= 0.5
+        prediction = (
+            probability >= 0.5
+        )
 
         return {
             "available": True,
@@ -522,7 +584,6 @@ class CAPGuardModelAdapter:
                 transformed.shape[1]
             ),
         }
-
 
     # ========================================================
     # FULL PREDICTION
@@ -549,42 +610,26 @@ class CAPGuardModelAdapter:
 
             # ------------------------------------------------
             # Engineering mapping ONLY
-            #
-            # The VITAL model expects a categorical
-            # chest_xray_finding feature with:
-            #
-            # Endpoint pneumonia
-            # NF
-            # Normal
-            # Other infiltrates
-            #
-            # The current X-Ray classifier is binary only.
-            #
-            # Therefore:
-            #
-            # Pneumonia -> Endpoint pneumonia
-            # Normal    -> Normal
-            #
-            # This is NOT a reconstruction of the original
-            # 4-class radiology labels.
             # ------------------------------------------------
 
             if (
-                "chest_xray_finding"
-                not in vital_data
+                "chest_xray_finding" not in vital_data
                 or vital_data["chest_xray_finding"] is None
             ):
 
                 vital_data = dict(vital_data)
 
                 if xray_result["class_index"] == 1:
-                    vital_data["chest_xray_finding"] = (
-                        "Endpoint pneumonia"
-                    )
+
+                    vital_data[
+                        "chest_xray_finding"
+                    ] = "Endpoint pneumonia"
+
                 else:
-                    vital_data["chest_xray_finding"] = (
-                        "Normal"
-                    )
+
+                    vital_data[
+                        "chest_xray_finding"
+                    ] = "Normal"
 
         else:
 
@@ -592,7 +637,6 @@ class CAPGuardModelAdapter:
                 "Full Evidence-Fuse V4 inference requires "
                 "an X-Ray image."
             )
-
 
         # ----------------------------------------------------
         # NLP
@@ -602,7 +646,6 @@ class CAPGuardModelAdapter:
             clinical_note
         )
 
-
         # ----------------------------------------------------
         # VITAL
         # ----------------------------------------------------
@@ -610,7 +653,6 @@ class CAPGuardModelAdapter:
         vital_result = self.predict_vital(
             vital_data
         )
-
 
         # ----------------------------------------------------
         # Evidence-Fuse V4
@@ -631,19 +673,15 @@ class CAPGuardModelAdapter:
         )
 
         final_prediction = (
-            final_probability >=
-            self.fusion_threshold
+            final_probability >= self.fusion_threshold
         )
-
 
         # ----------------------------------------------------
         # Final result
         # ----------------------------------------------------
 
         return {
-
             "engine": "CAPGuard Production Engine V1",
-
             "status": "SUCCESS",
 
             "fusion": {
@@ -665,7 +703,9 @@ class CAPGuardModelAdapter:
                     if final_prediction
                     else "Normal"
                 ),
-                "class_index": int(final_prediction),
+                "class_index": int(
+                    final_prediction
+                ),
                 "pneumonia_probability": float(
                     final_probability
                 ),
@@ -688,7 +728,14 @@ if __name__ == "__main__":
     adapter = CAPGuardModelAdapter()
 
     print()
-    print("ALL MODEL COMPONENTS LOADED SUCCESSFULLY.")
+    print("Adapter initialized successfully.")
+    print(
+        "Heavy model components will load "
+        "when inference is requested."
+    )
 
-
+    print(
+        "MODELS_LOADED =",
+        adapter._models_loaded
+    )
 

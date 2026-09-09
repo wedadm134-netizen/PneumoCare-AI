@@ -1,8 +1,9 @@
-﻿import os
+import os
 import sys
 import json
 import uuid
 import shutil
+import tempfile
 import sqlite3
 from datetime import datetime
 from pathlib import Path
@@ -10,6 +11,7 @@ from typing import Any, Dict, Optional
 
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
@@ -107,13 +109,19 @@ app.add_middleware(
 # DIRECTORIES
 # ============================================================
 
-DATA_DIR = BACKEND_DIR / "data"
-UPLOAD_DIR = BACKEND_DIR / "uploads"
+DEPLOY_ROOT = BACKEND_DIR.parent
+FRONTEND_DIST = DEPLOY_ROOT / 'frontend' / 'dist'
+
+DATA_DIR = Path(tempfile.gettempdir()) / "pneumocare_data"
+UPLOAD_DIR = Path(tempfile.gettempdir()) / "pneumocare_uploads"
 
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 DB_PATH = DATA_DIR / "capguard.db"
+
+app.mount("/assets", StaticFiles(directory=str(FRONTEND_DIST / "assets")), name="assets")
+app.mount("/static", StaticFiles(directory=str(FRONTEND_DIST)), name="static")
 
 
 # ============================================================
@@ -540,23 +548,15 @@ def build_severity_inputs(
 
 @app.get("/")
 def root():
+    if FRONTEND_DIST.is_dir():
+        return FileResponse(str(FRONTEND_DIST / "index.html"))
+
     return {
-        "project": "CAPGuard AI",
-        "engine": (
-            capguard_engine.ENGINE_VERSION
-            if capguard_engine is not None
-            else "UNAVAILABLE"
-        ),
-        "status": (
-            "READY"
-            if MODEL_ADAPTER is not None
-            and capguard_engine is not None
-            else "NOT_READY"
-        ),
+        "project": "PneumoCare AI",
+        "status": "READY" if MODEL_ADAPTER is not None and capguard_engine is not None else "NOT_READY",
         "api": "FastAPI",
         "version": "1.0.0",
     }
-
 
 # ============================================================
 # XAI / GRAD-CAM
@@ -1320,9 +1320,9 @@ def run_assessment(
         },
         "calculation": {
             "formula": (
-                f"({clinical_weight:.2f} Ã— "
+                f"({clinical_weight:.2f} x "
                 f"{clinical_probability:.4f}) + "
-                f"({vital_weight:.2f} Ã— "
+                f"({vital_weight:.2f} x "
                 f"{vital_probability:.4f})"
             ),
             "calculated_probability": (
@@ -1712,7 +1712,7 @@ app.include_router(assistant_router)
 if __name__ == "__main__":
 
     print("=" * 78)
-    print("CAPGuard-AI â€” PRODUCTION BACKEND V1")
+    print("CAPGuard-AI - PRODUCTION BACKEND V1")
     print("=" * 78)
 
     print(f"PROJECT ROOT : {PROJECT_ROOT}")
