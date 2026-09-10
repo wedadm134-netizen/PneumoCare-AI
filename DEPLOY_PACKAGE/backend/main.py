@@ -1,4 +1,4 @@
-import os
+﻿import os
 import sys
 import json
 import uuid
@@ -111,6 +111,18 @@ app.add_middleware(
 
 DEPLOY_ROOT = BACKEND_DIR.parent
 FRONTEND_DIST = DEPLOY_ROOT / 'frontend' / 'dist'
+
+
+# ============================================================
+# FRONTEND STATIC FILES
+# ============================================================
+
+if FRONTEND_DIST.is_dir():
+    app.mount(
+        "/assets",
+        StaticFiles(directory=str(FRONTEND_DIST / "assets")),
+        name="frontend-assets",
+    )
 
 DATA_DIR = Path(tempfile.gettempdir()) / "pneumocare_data"
 UPLOAD_DIR = Path(tempfile.gettempdir()) / "pneumocare_uploads"
@@ -543,6 +555,15 @@ def build_severity_inputs(
 # ============================================================
 # ROOT ENDPOINT
 # ============================================================
+
+@app.get("/favicon.svg")
+def favicon():
+    return FileResponse(str(FRONTEND_DIST / "favicon.svg"))
+
+
+@app.get("/icons.svg")
+def icons():
+    return FileResponse(str(FRONTEND_DIST / "icons.svg"))
 
 @app.get("/")
 def root():
