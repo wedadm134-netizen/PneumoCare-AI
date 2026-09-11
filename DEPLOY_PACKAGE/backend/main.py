@@ -1,4 +1,4 @@
-import os
+﻿import os
 import sys
 import json
 import uuid
@@ -15,6 +15,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
+from supabase import create_client, Client
 
 
 # ============================================================
@@ -23,6 +24,18 @@ from pydantic import BaseModel, Field
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 BACKEND_DIR = Path(__file__).resolve().parent
+
+# ============================================================
+# SUPABASE STORAGE
+# ============================================================
+
+SUPABASE_URL = os.getenv("SUPABASE_URL")
+SUPABASE_SERVICE_ROLE_KEY = os.getenv("SUPABASE_SERVICE_ROLE_KEY")
+SUPABASE_BUCKET = "xray-images"
+
+SUPABASE_CLIENT = None
+if SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY:
+    SUPABASE_CLIENT = create_client(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
 
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
@@ -378,6 +391,34 @@ def resolve_xray_path(
 ) -> Optional[Path]:
 
     if requested_path:
+        if str(requested_path).startswith(('http://', 'https://')):
+            import urllib.request
+
+            patient_dir = UPLOAD_DIR / f'patient_{patient_id}'
+            patient_dir.mkdir(parents=True, exist_ok=True)
+
+            extension = Path(str(requested_path).split('?')[0]).suffix.lower()
+            if extension not in {'.png', '.jpg', '.jpeg', '.webp'}:
+                extension = '.jpg'
+
+            local_path = patient_dir / f'downloaded_{uuid.uuid4().hex[:8]}{extension}'
+
+            try:
+                urllib.request.urlretrieve(str(requested_path), str(local_path))
+            except Exception as exc:
+                raise HTTPException(
+                    status_code=502,
+                    detail=f'Unable to download X-ray image: {exc}',
+                )
+
+            if not local_path.is_file():
+                raise HTTPException(
+                    status_code=404,
+                    detail='Downloaded X-ray file was not found.',
+                )
+
+            return local_path
+
         path = Path(requested_path)
 
         if not path.is_absolute():
@@ -388,31 +429,22 @@ def resolve_xray_path(
         if not path.is_file():
             raise HTTPException(
                 status_code=404,
-                detail="Requested X-ray file was not found.",
+                detail='Requested X-ray file was not found.',
             )
 
         return path
 
-    patient_dir = UPLOAD_DIR / f"patient_{patient_id}"
+    patient_dir = UPLOAD_DIR / f'patient_{patient_id}'
 
     if not patient_dir.exists():
         return None
 
     image_files = []
 
-    for pattern in [
-        "*.png",
-        "*.jpg",
-        "*.jpeg",
-        "*.webp",
-    ]:
+    for pattern in ['*.png', '*.jpg', '*.jpeg', '*.webp']:
         image_files.extend(patient_dir.glob(pattern))
 
-    image_files = [
-        path
-        for path in image_files
-        if path.is_file()
-    ]
+    image_files = [path for path in image_files if path.is_file()]
 
     if not image_files:
         return None
@@ -425,7 +457,6 @@ def resolve_xray_path(
     return image_files[0]
 
 
-# ============================================================
 # VITAL DATA BUILDER
 # ============================================================
 
@@ -902,68 +933,49 @@ async def upload_xray(
     patient = get_patient(patient_id)
 
     if patient is None:
-        raise HTTPException(
-            status_code=404,
-            detail="Patient not found.",
-        )
+        raise HTTPException(status_code=404, detail='Patient not found.')
 
-    original_filename = file.filename or ""
+    if SUPABASE_CLIENT is None:
+        raise HTTPException(status_code=503, detail='Supabase Storage is not configured.')
 
-    extension = Path(
-        original_filename
-    ).suffix.lower()
+    original_filename = file.filename or ''
+    extension = Path(original_filename).suffix.lower()
 
-    allowed_extensions = {
-        ".png",
-        ".jpg",
-        ".jpeg",
-        ".webp",
-    }
+    allowed_extensions = {'.png', '.jpg', '.jpeg', '.webp'}
 
     if extension not in allowed_extensions:
-        raise HTTPException(
-            status_code=400,
-            detail=(
-                "Unsupported X-ray format. "
-                "Allowed formats: PNG, JPG, JPEG, WEBP. "
-                "DICOM is not enabled."
-            ),
-        )
+        raise HTTPException(status_code=400, detail='Unsupported X-ray format. Allowed formats: PNG, JPG, JPEG, WEBP. DICOM is not enabled.')
 
-    patient_dir = UPLOAD_DIR / f"patient_{patient_id}"
-    patient_dir.mkdir(
-        parents=True,
-        exist_ok=True,
-    )
-
-    timestamp = datetime.now().strftime(
-        "%Y%m%d_%H%M%S"
-    )
-
+    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
     unique_id = uuid.uuid4().hex[:8]
+    filename = f'patient_{patient_id}/{timestamp}_{unique_id}{extension}'
 
-    filename = (
-        f"{timestamp}_{unique_id}{extension}"
-    )
+    try:
+        file_bytes = await file.read()
 
-    saved_path = patient_dir / filename
-
-    with saved_path.open("wb") as buffer:
-        shutil.copyfileobj(
-            file.file,
-            buffer,
+        SUPABASE_CLIENT.storage.from_(SUPABASE_BUCKET).upload(
+            path=filename,
+            file=file_bytes,
+            file_options={
+                'content-type': file.content_type or 'application/octet-stream',
+                'upsert': 'false',
+            },
         )
+
+        public_url = SUPABASE_CLIENT.storage.from_(SUPABASE_BUCKET).get_public_url(filename)
+
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=f'X-ray upload to Supabase failed: {exc}')
 
     return {
-        "status": "success",
-        "patient_id": patient_id,
-        "original_filename": original_filename,
-        "saved_path": str(saved_path),
-        "xray_path": str(saved_path),
+        'status': 'success',
+        'patient_id': patient_id,
+        'original_filename': original_filename,
+        'saved_path': public_url,
+        'xray_path': public_url,
     }
 
 
-# ============================================================
 # PRODUCTION ASSESSMENT
 # ============================================================
 
@@ -1803,3 +1815,8 @@ if __name__ == '__main__':
         port=int(os.getenv('PORT', '8000')),
         reload=False,
     )
+
+
+
+
+
