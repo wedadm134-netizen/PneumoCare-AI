@@ -1,10 +1,11 @@
-﻿import os
+import os
 import sys
 import json
 import uuid
 import shutil
 import tempfile
-import sqlite3
+import psycopg
+from psycopg.rows import dict_row
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, Optional
@@ -139,10 +140,10 @@ DB_PATH = DATA_DIR / "capguard.db"
 # ============================================================
 
 def get_db():
-    conn = sqlite3.connect(str(DB_PATH))
-    conn.row_factory = sqlite3.Row
-    return conn
-
+    database_url = os.getenv("DATABASE_URL")
+    if not database_url:
+        raise RuntimeError("DATABASE_URL environment variable is not set.")
+    return psycopg.connect(database_url, row_factory=dict_row)
 
 def init_database():
     conn = get_db()
@@ -151,7 +152,7 @@ def init_database():
     cursor.execute(
         """
         CREATE TABLE IF NOT EXISTS patients (
-            patient_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            patient_id SERIAL PRIMARY KEY,
             patient_name TEXT NOT NULL,
             age REAL,
             biological_sex TEXT,
@@ -163,7 +164,7 @@ def init_database():
     cursor.execute(
         """
         CREATE TABLE IF NOT EXISTS assessments (
-            assessment_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            assessment_id SERIAL PRIMARY KEY,
             patient_id INTEGER NOT NULL,
             patient_name TEXT,
             clinical_notes TEXT,
@@ -355,7 +356,7 @@ def get_patient(patient_id: int):
             """
             SELECT *
             FROM patients
-            WHERE patient_id = ?
+            WHERE patient_id = %s
             """,
             (patient_id,),
         )
@@ -807,7 +808,7 @@ def create_patient(data: PatientCreate):
                 biological_sex,
                 created_at
             )
-            VALUES (?, ?, ?, ?)
+            VALUES (%s, %s, %s, %s)
             """,
             (
                 patient_name,
@@ -817,7 +818,8 @@ def create_patient(data: PatientCreate):
             ),
         )
 
-        patient_id = cursor.lastrowid
+        cursor.execute("SELECT lastval() AS patient_id")
+        patient_id = cursor.fetchone()['patient_id']
 
         conn.commit()
 
@@ -1518,7 +1520,7 @@ def run_assessment(
                 result_json,
                 created_at
             )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
             """,
             (
                 data.patient_id,
@@ -1571,7 +1573,7 @@ def get_patient_history(patient_id: int):
                 result_json,
                 created_at
             FROM assessments
-            WHERE patient_id = ?
+            WHERE patient_id = %s
             ORDER BY assessment_id DESC
         """, (patient_id,))
         rows = cursor.fetchall()
