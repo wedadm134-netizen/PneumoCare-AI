@@ -279,12 +279,10 @@ class CAPGuardModelAdapter:
         if is_lfs_pointer or not resnet_path.is_file():
             print("[XRAY] ResNet checkpoint not available locally.")
             print("[XRAY] Downloading ResNet50 from Hugging Face...")
-            downloaded_resnet = hf_hub_download(
-                repo_id="WedadMohamed/PneumoCare-AI-Models",
-                filename="resnet50/resnet50-11ad3fa6.pth",
-                token=os.getenv("HF_TOKEN"),
-            )
-            resnet_path = Path(downloaded_resnet)
+            import urllib.request
+            resnet_url = "https://huggingface.co/WedadMohamed/PneumoCare-AI-Models/resolve/main/resnet50/resnet50-11ad3fa6.pth"
+            print("[XRAY] Downloading ResNet50 directly...")
+            urllib.request.urlretrieve(resnet_url, str(resnet_path))
             print(f"[XRAY] ResNet checkpoint ready: {resnet_path}")
 
         state = torch.load(
