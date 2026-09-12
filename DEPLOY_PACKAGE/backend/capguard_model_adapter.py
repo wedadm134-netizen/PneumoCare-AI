@@ -394,41 +394,20 @@ mmap=True
         print()
         print("[NLP] Loading ClinicalBERT V4...")
 
-        from huggingface_hub import hf_hub_download
+        from huggingface_hub import snapshot_download
 
         local_dir = Path(CLINICAL_BERT_DIR)
         local_dir.mkdir(parents=True, exist_ok=True)
 
-        repo_id = "WedadMohamed/PneumoCare-AI-Models"
-        repo_prefix = "clin_note_v4/clinical_bert_v4_final"
+        print("[NLP] Downloading ClinicalBERT V4 from Hugging Face...")
 
-        required_files = [
-            "config.json",
-            "model.safetensors",
-            "special_tokens_map.json",
-            "tokenizer.json",
-            "tokenizer_config.json",
-            "training_args.bin",
-            "vocab.txt"
-        ]
+        snapshot_download(
+            repo_id="WedadMohamed/PneumoCare-AI-Models",
+            allow_patterns=["clin_note_v4/clinical_bert_v4_final/*"],
+            local_dir=str(local_dir.parent.parent)
+        )
 
-        print("[NLP] Downloading ClinicalBERT V4 files from Hugging Face...")
-
-        for filename in required_files:
-            target = local_dir / filename
-            try:
-                if target.exists():
-                    target.unlink()
-                hf_hub_download(
-                    repo_id=repo_id,
-                    filename=f"{repo_prefix}/{filename}",
-                    local_dir=str(local_dir),
-                    local_dir_use_symlinks=False
-                )
-                print(f"[NLP] {filename}: OK")
-            except Exception as e:
-                print(f"[NLP] Failed downloading {filename}: {e}")
-                raise
+        print("[NLP] ClinicalBERT files ready.")
 
         self.tokenizer = AutoTokenizer.from_pretrained(
             str(local_dir),
