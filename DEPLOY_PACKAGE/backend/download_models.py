@@ -21,7 +21,7 @@ HF_TOKEN = os.getenv("HF_TOKEN")
 # ============================================================
 
 BACKEND_DIR = Path(__file__).resolve().parent
-PROJECT_ROOT = BACKEND_DIR.parents[1]
+PROJECT_ROOT = BACKEND_DIR.parent
 
 ROOT_MODELS = PROJECT_ROOT / "models"
 DEPLOY_MODELS = BACKEND_DIR / "models"
