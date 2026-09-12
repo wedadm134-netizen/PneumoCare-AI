@@ -285,10 +285,14 @@ class CAPGuardModelAdapter:
             urllib.request.urlretrieve(resnet_url, str(resnet_path))
             print(f"[XRAY] ResNet checkpoint ready: {resnet_path}")
 
+        print("[XRAY] About to load checkpoint:", resnet_path)
+        print("[XRAY] Checkpoint size:", resnet_path.stat().st_size, "bytes")
+        print("[XRAY] Calling torch.load...")
         state = torch.load(
             str(resnet_path),
             map_location="cpu"
         )
+        print("[XRAY] torch.load completed successfully.")
 
         if isinstance(state, dict) and "state_dict" in state:
             state = state["state_dict"]
