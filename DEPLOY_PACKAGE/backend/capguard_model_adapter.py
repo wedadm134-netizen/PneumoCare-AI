@@ -8,6 +8,8 @@ import numpy as np
 from PIL import Image
 from torchvision import models, transforms
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
+from pathlib import Path
+from huggingface_hub import hf_hub_download
 
 
 # ============================================================
@@ -263,8 +265,30 @@ class CAPGuardModelAdapter:
 
         resnet = models.resnet50(weights=None)
 
+        resnet_path = Path(RESNET_PATH)
+
+        is_lfs_pointer = False
+        if resnet_path.is_file():
+            try:
+                with resnet_path.open("rb") as f:
+                    header = f.read(80)
+                is_lfs_pointer = header.startswith(b"version https://git-lfs.github.com/spec/v1")
+            except Exception:
+                is_lfs_pointer = False
+
+        if is_lfs_pointer or not resnet_path.is_file():
+            print("[XRAY] ResNet checkpoint not available locally.")
+            print("[XRAY] Downloading ResNet50 from Hugging Face...")
+            downloaded_resnet = hf_hub_download(
+                repo_id="WedadMohamed/PneumoCare-AI-Models",
+                filename="resnet50/resnet50-11ad3fa6.pth",
+                token=os.getenv("HF_TOKEN"),
+            )
+            resnet_path = Path(downloaded_resnet)
+            print(f"[XRAY] ResNet checkpoint ready: {resnet_path}")
+
         state = torch.load(
-            RESNET_PATH,
+            str(resnet_path),
             map_location="cpu"
         )
 
