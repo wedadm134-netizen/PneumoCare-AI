@@ -325,38 +325,36 @@ mmap=True
         ])
 
         print("[XRAY] ResNet50: OK")
-print("[XRAY] Loading classifier...")
+        print("[XRAY] Loading classifier...")
 
-# --- حماية من Git LFS pointer + تحميل مباشر ---
-classifier_path = Path(XRAY_CHECKPOINT)
-is_lfs_pointer = False
-
-if classifier_path.is_file():
-    try:
-        with classifier_path.open("rb") as f:
-            header = f.read(80)
-        is_lfs_pointer = header.startswith(b"version https://git-lfs.github.com/spec/v1")
-    except Exception:
+        classifier_path = Path(XRAY_CHECKPOINT)
         is_lfs_pointer = False
 
-if is_lfs_pointer or not classifier_path.is_file():
-    print("[XRAY] Classifier checkpoint not available locally (or is LFS pointer).")
-    print("[XRAY] Downloading classifier from Hugging Face...")
-    
-    classifier_path.parent.mkdir(parents=True, exist_ok=True)
-    
-    # ← غيّر الرابط ده لو اسم الريبو مختلف
-    classifier_url = "https://huggingface.co/WedadMohamed/PneumoCare-AI-Models/resolve/main/XRay_Branch_V1/best_image_classifier.pt"
-    
-    import urllib.request
-    urllib.request.urlretrieve(classifier_url, str(classifier_path))
-    print(f"[XRAY] Classifier downloaded. Size = {classifier_path.stat().st_size} bytes")
+        if classifier_path.is_file():
+            try:
+                with classifier_path.open("rb") as f:
+                    header = f.read(80)
+                is_lfs_pointer = header.startswith(b"version https://git-lfs.github.com/spec/v1")
+            except Exception:
+                is_lfs_pointer = False
 
-checkpoint = torch.load(
-    str(classifier_path),
-    map_location="cpu",
-    weights_only=False   # مهم مع PyTorch الحديث
-)
+        if is_lfs_pointer or not classifier_path.is_file():
+            print("[XRAY] Classifier checkpoint not available locally (or is LFS pointer).")
+            print("[XRAY] Downloading classifier from Hugging Face...")
+
+            classifier_path.parent.mkdir(parents=True, exist_ok=True)
+
+            classifier_url = "https://huggingface.co/WedadMohamed/PneumoCare-AI-Models/resolve/main/XRay_Branch_V1/best_image_classifier.pt"
+
+            import urllib.request
+            urllib.request.urlretrieve(classifier_url, str(classifier_path))
+            print(f"[XRAY] Classifier downloaded. Size = {classifier_path.stat().st_size} bytes")
+
+        checkpoint = torch.load(
+            str(classifier_path),
+            map_location="cpu",
+            weights_only=False
+        )
 
         self.xray_classifier = XRayClassifier()
 
