@@ -396,7 +396,8 @@ mmap=True
 
         self.tokenizer = AutoTokenizer.from_pretrained(
             CLINICAL_BERT_DIR,
-            local_files_only=True
+            local_files_only=True,
+            trust_remote_code=False
         )
 
         self.nlp_model = (
@@ -404,7 +405,8 @@ mmap=True
             .from_pretrained(
                 CLINICAL_BERT_DIR,
                 local_files_only=True,
-                num_labels=2
+                num_labels=2,
+                trust_remote_code=False
             )
         )
 
