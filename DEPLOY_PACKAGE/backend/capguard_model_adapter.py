@@ -1,4 +1,4 @@
-import os
+﻿import os
 import json
 import joblib
 import torch
@@ -13,7 +13,7 @@ from huggingface_hub import hf_hub_download
 
 
 # ============================================================
-# CAPGuard AI — Production Model Adapter V1
+# CAPGuard AI â€” Production Model Adapter V1
 # ============================================================
 
 PROJECT = os.path.dirname(os.path.abspath(__file__))
@@ -760,4 +760,5 @@ if __name__ == "__main__":
         "MODELS_LOADED =",
         adapter._models_loaded
     )
+
 
