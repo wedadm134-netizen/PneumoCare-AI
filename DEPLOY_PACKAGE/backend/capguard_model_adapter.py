@@ -291,7 +291,8 @@ class CAPGuardModelAdapter:
         state = torch.load(
             str(resnet_path),
             map_location="cpu",
-            weights_only=True
+            weights_only=True,
+mmap=True
         )
         print("[XRAY] torch.load completed successfully.")
 
