@@ -745,7 +745,6 @@ function App() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            xray_path: xrayData?.xray_path || xrayData?.saved_path || null,
  patient_name: patientName.trim(),
             age: Number(patientAge),
             biological_sex: biologicalSex,
@@ -1199,7 +1198,6 @@ function App() {
           patient_id:
             patientId,
 
-          xray_path: xrayData?.xray_path || xrayData?.saved_path || null,
  patient_name:
             createdPatient.patient_name ||
             patientName ||
@@ -1215,7 +1213,6 @@ function App() {
             null,
         },
 
-        xray: xrayData,
       };
 
       setAssessmentResult(
@@ -1527,7 +1524,6 @@ function App() {
             patient?.patient_id ??
             null,
 
-          xray_path: xrayData?.xray_path || xrayData?.saved_path || null,
  patient_name:
             patient?.patient_name ??
             null,
@@ -6231,7 +6227,6 @@ function normalizeHistoryPatient(
         candidate.id ??
         fallbackId,
 
-      xray_path: xrayData?.xray_path || xrayData?.saved_path || null,
  patient_name:
         candidate.patient_name ??
         candidate.patientName ??
@@ -6257,7 +6252,6 @@ function normalizeHistoryPatient(
   return {
     patient_id:
       fallbackId,
-    xray_path: xrayData?.xray_path || xrayData?.saved_path || null,
  patient_name: "",
     age: null,
     biological_sex: "",
