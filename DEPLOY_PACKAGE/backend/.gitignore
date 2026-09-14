@@ -1,0 +1,10 @@
+﻿.env
+venv
+__pycache__/
+*.pyc
+uploads/
+
+*.env*
+*.bak*
+test_upload.*
+rag_service.py.bak*

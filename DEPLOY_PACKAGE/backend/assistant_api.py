@@ -1,4 +1,4 @@
-import os
+﻿import os
 import json
 import time
 from typing import Optional, Dict, Any, List
@@ -11,6 +11,7 @@ from google import genai
 from google.genai import types
 
 from treatment_engine import generate_treatment_plan
+from rag_service import search_knowledge, format_context
 
 
 # ============================================================
@@ -40,7 +41,7 @@ GEMINI_FALLBACK_MODELS = [
 GEMINI_RETRIES_ON_TIMEOUT = 1
 GEMINI_RETRY_DELAY_SECONDS = 1
 GEMINI_TIMEOUT_MS = 45000
-GEMINI_MAX_OUTPUT_TOKENS = 800
+GEMINI_MAX_OUTPUT_TOKENS = 1200
 
 
 # ============================================================
@@ -600,6 +601,27 @@ def build_clinical_context(
 
 
 # ============================================================
+# RAG MEDICAL EVIDENCE
+# ============================================================
+
+def retrieve_medical_evidence(question: str, top_k: int = 5) -> List[Dict[str, Any]]:
+    try:
+        results = search_knowledge(question, top_k=top_k)
+        evidence = []
+        for item in results:
+            evidence.append({
+                "source_name": item.get("source_name", "Unknown source"),
+                "page": item.get("page"),
+                "retrieval_score": round(float(item.get("retrieval_score", 0.0)), 4),
+                "text": item.get("text", ""),
+            })
+        print(f"[RAG] Retrieved {len(evidence)} medical evidence chunks.")
+        return evidence
+    except Exception as exc:
+        print("[RAG] Retrieval failed:", str(exc))
+        return []
+
+# ============================================================
 # GEMINI MODEL DISCOVERY
 # ============================================================
 
@@ -815,6 +837,8 @@ def ask_gemini(
     clinical_context: Dict[str, Any],
     safety_signals: Dict[str, Any],
     treatment_plan: Optional[Dict[str, Any]],
+    rag_context: str = "",
+
 ) -> str:
 
     # --------------------------------------------------------
@@ -838,6 +862,9 @@ Respond in clear professional English.
 Do not expose internal model names, weights,
 thresholds, implementation details, or code.
 """
+
+    if not rag_context:
+        rag_context = "No external medical evidence was retrieved for this question."
 
     system_instruction = f"""
 You are the conversational clinical AI assistant
@@ -885,6 +912,12 @@ When these sources disagree:
 - Do NOT change the supplied probabilities.
 
 ------------------------------------------------------------
+RETRIEVED MEDICAL EVIDENCE
+------------------------------------------------------------
+
+Use the retrieved medical evidence below to support general medical explanations. Do not expose retrieval scores, database details, embedding models, or internal RAG architecture. Do not use retrieved evidence to override the patient-specific structured assessment.
+
+------------------------------------------------------------
 SAFETY RULES
 ------------------------------------------------------------
 
@@ -918,6 +951,19 @@ is required, say so clearly.
 
 Do not present treatment as a substitute for clinical
 assessment.
+
+------------------------------------------------------------
+QUESTION SCOPE RULES
+------------------------------------------------------------
+
+If the patient, assessment, and visit data are empty, treat the user question as a GENERAL KNOWLEDGE question.
+For general knowledge questions, answer primarily from the supplied MEDICAL KNOWLEDGE RAG CONTEXT.
+For questions about severe pneumonia, danger signs, general danger signs, hypoxaemia, or urgent pneumonia referral, prioritize the WHO 2024 Guideline results in the supplied RAG context when available.
+Do not use or cite a Pocket Book differential-diagnosis page as the primary source for severe-pneumonia danger signs when a relevant WHO 2024 Guideline result is present.
+Only cite a source and page number that are actually present in the supplied RAG context.
+Do NOT say that no patient assessment is available unless the user is specifically asking about a patient assessment.
+Do NOT discuss the treatment plan when the user is asking a general medical knowledge question.
+When the RAG context contains a relevant source and page, cite the source name and page in the answer.
 
 ------------------------------------------------------------
 RESPONSE STYLE
@@ -967,6 +1013,16 @@ Treatment Engine Result:
 USER QUESTION
 ------------------------------------------------------------
 
+------------------------------------------------------------
+MEDICAL KNOWLEDGE RAG CONTEXT
+------------------------------------------------------------
+
+{rag_context}
+
+------------------------------------------------------------
+USER QUESTION
+------------------------------------------------------------
+
 {question}
 """
 
@@ -1011,6 +1067,7 @@ USER QUESTION
                         config=types.GenerateContentConfig(
                             temperature=0.1,
                             max_output_tokens=GEMINI_MAX_OUTPUT_TOKENS,
+                            thinking_config=types.ThinkingConfig(thinking_level="low"),
                         ),
                     )
                 )
@@ -1288,8 +1345,20 @@ def assistant_chat(
         )
 
         # ====================================================
+        # RAG MEDICAL EVIDENCE
+        # ====================================================
+
+        rag_evidence = retrieve_medical_evidence(
+            question=request.question,
+            top_k=5,
+        )
+
+        # ====================================================
         # GEMINI
         # ====================================================
+
+        rag_results = search_knowledge(request.question, top_k=5)
+        rag_context = format_context(rag_results)
 
         answer = ask_gemini(
             question=request.question,
@@ -1297,6 +1366,7 @@ def assistant_chat(
             clinical_context=clinical_context,
             safety_signals=safety_signals,
             treatment_plan=treatment_plan,
+            rag_context=rag_context,
         )
 
         # ====================================================
@@ -1310,6 +1380,7 @@ def assistant_chat(
             "clinical_context": clinical_context,
             "safety": safety_signals,
             "treatment_plan": treatment_plan,
+            "rag_evidence": rag_evidence,
         }
 
         return AssistantChatResponse(
@@ -1325,6 +1396,7 @@ def assistant_chat(
             context_used=context_used,
             status="READY",
             treatment_plan=treatment_plan,
+            rag_context=rag_context,
         )
 
     except RuntimeError as exc:
@@ -1358,3 +1430,18 @@ def assistant_chat(
                 "inside the clinical AI assistant."
             ),
         ) from exc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
