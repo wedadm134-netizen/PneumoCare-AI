@@ -10,6 +10,9 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, Optional
 
+from dotenv import load_dotenv
+load_dotenv()
+
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -22,7 +25,7 @@ from supabase import create_client, Client
 # PROJECT PATHS
 # ============================================================
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parent
 BACKEND_DIR = Path(__file__).resolve().parent
 
 # ============================================================
@@ -1815,6 +1818,8 @@ if __name__ == '__main__':
         port=int(os.getenv('PORT', '8000')),
         reload=False,
     )
+
+
 
 
 
