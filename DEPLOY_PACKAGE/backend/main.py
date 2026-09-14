@@ -51,14 +51,6 @@ if str(BACKEND_DIR) not in sys.path:
 # ASSISTANT API
 # ============================================================
 
-import subprocess
-
-# Download production models if they are not present
-MODELS_DIR = BACKEND_DIR / "models"
-EVIDENCE_CONFIG = MODELS_DIR / "evidence_fuse_v4" / "evidence_fuse_v4_config.json"
-if not EVIDENCE_CONFIG.is_file():
-    subprocess.run([sys.executable, str(BACKEND_DIR / "download_models.py")], check=True)
-
 from assistant_api import router as assistant_router
 
 
