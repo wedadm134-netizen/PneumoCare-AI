@@ -5,7 +5,7 @@ import chromadb
 from sentence_transformers import SentenceTransformer
 
 
-DB_DIR = Path(__file__).resolve().parent.parent / "rag_db"
+DB_DIR = Path(__file__).resolve().parent / "rag_db"
 COLLECTION_NAME = "pneumocare_medical_knowledge"
 MODEL_NAME = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 

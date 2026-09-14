@@ -1,0 +1,26 @@
+﻿# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+backend/venv/
+venv/
+
+# Secrets
+.env
+backend/.env
+*.env
+
+# Backups
+*_backup*.py
+*.backup*
+*.bak
+
+# Local data
+backend/data/
+!rag_db/*.bin
+!rag_db/**/*.bin
+
+!DEPLOY_PACKAGE/backend/rag_db/**/*.bin
+
