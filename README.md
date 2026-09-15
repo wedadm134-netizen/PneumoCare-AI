@@ -1,4 +1,4 @@
-CAPGuard AI
+﻿CAPGuard AI
 ===========
 
 Dual-Evidence Clinical Fusion for Early Pediatric CAP Detection
