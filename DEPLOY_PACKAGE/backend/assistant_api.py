@@ -1,4 +1,4 @@
-﻿import os
+import os
 import json
 import time
 from typing import Optional, Dict, Any, List
@@ -13,6 +13,7 @@ from google.genai import types
 from treatment_engine import generate_treatment_plan
 from rag_service import search_knowledge, format_context
 
+from intent_router import classify_question_intent, detect_question_language
 
 # ============================================================
 # ENVIRONMENT
@@ -833,6 +834,7 @@ def classify_gemini_error(
 
 def ask_gemini(
     question: str,
+    question_intent: str,
     language: str,
     clinical_context: Dict[str, Any],
     safety_signals: Dict[str, Any],
@@ -890,6 +892,28 @@ You must encourage appropriate clinician review when
 clinical judgment is required.
 
 ------------------------------------------------------------
+------------------------------------------------------------
+QUESTION INTENT
+------------------------------------------------------------
+
+Current question intent: {question_intent}
+
+Behavior by intent:
+
+- casual: Answer naturally and casually. Do not mention the patient, assessment, X-ray, treatment, or clinical context unless the user explicitly asks about them.
+
+- patient_assessment: Focus on the current patient's overall assessment using only supplied patient-specific evidence.
+
+- xray: Focus on the X-ray findings only.
+
+- conflict: Explain differences or disagreement between clinical assessment, vitals/laboratory evidence, and X-ray findings without inventing facts or changing probabilities.
+
+- treatment: Focus on the treatment plan and clinical guidance supplied by the treatment engine.
+
+- general_medical: Answer as a general medical knowledge question and use retrieved medical evidence when relevant.
+
+Always answer the user's actual question directly. Do not force patient context into a question that does not ask for it.
+
 EVIDENCE RULES
 ------------------------------------------------------------
 
@@ -1245,6 +1269,9 @@ def assistant_chat(
 
     try:
 
+        question_intent = classify_question_intent(request.question)
+        effective_language = detect_question_language(request.question)
+
         # ====================================================
         # SAFETY SIGNALS
         # ====================================================
@@ -1254,7 +1281,6 @@ def assistant_chat(
             assessment=request.assessment,
             visit=request.visit,
         )
-
         # ====================================================
         # CLINICAL CONTEXT
         # ====================================================
@@ -1361,8 +1387,9 @@ def assistant_chat(
         rag_context = format_context(rag_results)
 
         answer = ask_gemini(
+            question_intent=question_intent,
             question=request.question,
-            language=request.language,
+            language=effective_language,
             clinical_context=clinical_context,
             safety_signals=safety_signals,
             treatment_plan=treatment_plan,
@@ -1386,7 +1413,7 @@ def assistant_chat(
         return AssistantChatResponse(
             assistant="PneumoCare AI",
             answer=answer,
-            language=request.language,
+            language=effective_language,
             safety_flag=safety_signals[
                 "safety_flag"
             ],
@@ -1430,6 +1457,7 @@ def assistant_chat(
                 "inside the clinical AI assistant."
             ),
         ) from exc
+
 
 
 

@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 const API_BASE_URL = "";
@@ -25,8 +25,8 @@ const translations = {
     clinicalText: "Clinical notes analysis",
     vital: "Vital Signs",
     vitalText: "Structured clinical evidence",
-    production: "PRODUCTION",
-    engineReady: "System Ready",
+    production: "",
+    engineReady: "",
     hybrid: "AI EVIDENCE",
     featuresTitle: "Multiple Sources. One Intelligent Assessment.",
     featuresText:
@@ -42,7 +42,7 @@ const translations = {
       "Vital signs are analyzed as structured clinical evidence.",
     safetyShort:
       "Clinical decision support only. Results require qualified clinical review and confirmation.",
-    release: "Production Release V1",
+    release: "",
 
     patientManagement: "Patient Management",
     newAssessment: "Start a New Assessment",
@@ -101,7 +101,7 @@ const translations = {
     severity: "Severity",
     clinicalNotes: "Clinical Notes",
     vitals: "Vital Signs",
-    cbc: "Laboratory Results â€” CBC",
+    cbc: "Laboratory Results — CBC",
     xray: "Chest X-Ray",
     noData: "Not available",
     newVisit: "Start New Visit",
@@ -115,7 +115,7 @@ const translations = {
     clinicalInfo: "Clinical Information",
     clinicalInfoDesc:
       "Enter available clinical findings and vital signs.",
-    temperature: "Temperature (Â°C)",
+    temperature: "Temperature (°C)",
     heartRate: "Heart Rate (bpm)",
     oxygen: "Oxygen Saturation (%)",
     required: "required",
@@ -138,7 +138,7 @@ const translations = {
     runAssessment: "Run PneumoCare AI",
     running: "Running AI Assessment...",
     assessmentError: "Assessment Error",
-    complete: "AI Assessment Complete",
+    complete: "",
 
     resultTitle: "PneumoCare AI Assessment Result",
     resultText:
@@ -270,271 +270,271 @@ const translations = {
 
   ar: {
     brand: "PneumoCare AI",
-    tagline: "Ø§Ù„ØªÙ‚ÙŠÙŠÙ… Ø§Ù„Ø°ÙƒÙŠ Ù„Ù„Ø§Ù„ØªÙ‡Ø§Ø¨ Ø§Ù„Ø±Ø¦ÙˆÙŠ",
+    tagline: "التقييم الذكي للالتهاب الرئوي",
     fullTagline:
-      "Ø§Ù„ØªÙ‚ÙŠÙŠÙ… Ø§Ù„Ø°ÙƒÙŠ Ù„Ù„Ø§Ù„ØªÙ‡Ø§Ø¨ Ø§Ù„Ø±Ø¦ÙˆÙŠ ÙˆØ¯Ø¹Ù… Ø§Ù„Ù‚Ø±Ø§Ø± Ø§Ù„Ø³Ø±ÙŠØ±ÙŠ",
-    home: "Ø§Ù„Ø±Ø¦ÙŠØ³ÙŠØ©",
-    features: "Ø§Ù„Ù…Ù…ÙŠØ²Ø§Øª",
-    about: "Ø¹Ù† Ø§Ù„Ù†Ø¸Ø§Ù…",
-    start: "Ø¨Ø¯Ø¡ Ø§Ù„ØªÙ‚ÙŠÙŠÙ…",
-    explore: "Ø§Ø³ØªÙƒØ´Ø§Ù Ø§Ù„Ù†Ø¸Ø§Ù…",
-    aiSupport: "Ø¯Ø¹Ù… Ø§Ù„Ù‚Ø±Ø§Ø± Ø§Ù„Ø³Ø±ÙŠØ±ÙŠ Ø¨Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ",
-    heroTitle1: "ØªÙ‚ÙŠÙŠÙ… Ø£Ø°ÙƒÙ‰ Ù„Ù„Ø§Ù„ØªÙ‡Ø§Ø¨ Ø§Ù„Ø±Ø¦ÙˆÙŠ",
-    heroTitle2: "Ø¨Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ",
+      "التقييم الذكي للالتهاب الرئوي ودعم القرار السريري",
+    home: "الرئيسية",
+    features: "المميزات",
+    about: "عن النظام",
+    start: "بدء التقييم",
+    explore: "استكشاف النظام",
+    aiSupport: "دعم القرار السريري بالذكاء الاصطناعي",
+    heroTitle1: "تقييم أذكى للالتهاب الرئوي",
+    heroTitle2: "باستخدام الذكاء الاصطناعي",
     heroText:
-      "ÙŠØ¬Ù…Ø¹ PneumoCare AI Ø§Ù„Ù…Ø¹Ù„ÙˆÙ…Ø§Øª Ø§Ù„Ø³Ø±ÙŠØ±ÙŠØ© ÙˆØ§Ù„Ø¹Ù„Ø§Ù…Ø§Øª Ø§Ù„Ø­ÙŠÙˆÙŠØ© ÙˆØªØ­Ù„ÙŠÙ„ Ø£Ø´Ø¹Ø© Ø§Ù„ØµØ¯Ø± Ù„Ø¯Ø¹Ù… ØªÙ‚ÙŠÙŠÙ… Ø§Ù„Ø§Ù„ØªÙ‡Ø§Ø¨ Ø§Ù„Ø±Ø¦ÙˆÙŠ.",
-    imaging: "Ø§Ù„Ø£Ø´Ø¹Ø©",
-    imagingText: "ØªØ­Ù„ÙŠÙ„ Ø£Ø´Ø¹Ø© Ø§Ù„ØµØ¯Ø±",
-    clinical: "Ø§Ù„Ù…Ø¹Ù„ÙˆÙ…Ø§Øª Ø§Ù„Ø³Ø±ÙŠØ±ÙŠØ©",
-    clinicalText: "ØªØ­Ù„ÙŠÙ„ Ø§Ù„Ù…Ù„Ø§Ø­Ø¸Ø§Øª Ø§Ù„Ø³Ø±ÙŠØ±ÙŠØ©",
-    vital: "Ø§Ù„Ø¹Ù„Ø§Ù…Ø§Øª Ø§Ù„Ø­ÙŠÙˆÙŠØ©",
-    vitalText: "Ø§Ù„Ø£Ø¯Ù„Ø© Ø§Ù„Ø³Ø±ÙŠØ±ÙŠØ© Ø§Ù„Ù…Ù†Ø¸Ù…Ø©",
-    production: "Ø¥ØµØ¯Ø§Ø± Ø¥Ù†ØªØ§Ø¬ÙŠ",
-    engineReady: "Ø§Ù„Ù†Ø¸Ø§Ù… Ø¬Ø§Ù‡Ø²",
-    hybrid: "Ø§Ù„Ø£Ø¯Ù„Ø© Ø§Ù„Ù…Ø¯Ø¹ÙˆÙ…Ø© Ø¨Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ",
-    featuresTitle: "Ù…ØµØ§Ø¯Ø± Ù…ØªØ¹Ø¯Ø¯Ø©. ØªÙ‚ÙŠÙŠÙ… Ø°ÙƒÙŠ ÙˆØ§Ø­Ø¯.",
+      "يجمع PneumoCare AI المعلومات السريرية والعلامات الحيوية وتحليل أشعة الصدر لدعم تقييم الالتهاب الرئوي.",
+    imaging: "الأشعة",
+    imagingText: "تحليل أشعة الصدر",
+    clinical: "المعلومات السريرية",
+    clinicalText: "تحليل الملاحظات السريرية",
+    vital: "العلامات الحيوية",
+    vitalText: "الأدلة السريرية المنظمة",
+    production: "إصدار إنتاجي",
+    engineReady: "النظام جاهز",
+    hybrid: "الأدلة المدعومة بالذكاء الاصطناعي",
+    featuresTitle: "مصادر متعددة. تقييم ذكي واحد.",
     featuresText:
-      "ÙŠØ¬Ù…Ø¹ PneumoCare AI Ø§Ù„Ø£Ø¯Ù„Ø© Ø§Ù„Ø³Ø±ÙŠØ±ÙŠØ© Ø§Ù„Ù…Ø®ØªÙ„ÙØ© Ù„Ø¯Ø¹Ù… ØªÙ‚ÙŠÙŠÙ… Ø£ÙƒØ«Ø± Ø´Ù…ÙˆÙ„Ù‹Ø§.",
-    xrayFeature: "ØªØ­Ù„ÙŠÙ„ Ø£Ø´Ø¹Ø© Ø§Ù„ØµØ¯Ø±",
+      "يجمع PneumoCare AI الأدلة السريرية المختلفة لدعم تقييم أكثر شمولًا.",
+    xrayFeature: "تحليل أشعة الصدر",
     xrayFeatureText:
-      "ØªØ­Ù„ÙŠÙ„ Ù…Ø¯Ø¹ÙˆÙ… Ø¨Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ Ù„Ø£Ø´Ø¹Ø© Ø§Ù„ØµØ¯Ø± Ù„ØªØµÙ†ÙŠÙ Ø§Ù„Ø­Ø§Ù„Ø©.",
-    nlpFeature: "ØªØ­Ù„ÙŠÙ„ Ø§Ù„Ù…Ø¹Ù„ÙˆÙ…Ø§Øª Ø§Ù„Ø³Ø±ÙŠØ±ÙŠØ©",
+      "تحليل مدعوم بالذكاء الاصطناعي لأشعة الصدر لتصنيف الحالة.",
+    nlpFeature: "تحليل المعلومات السريرية",
     nlpFeatureText:
-      "ØªØ­Ù„ÙŠÙ„ Ø§Ù„Ù…Ù„Ø§Ø­Ø¸Ø§Øª Ø§Ù„Ø³Ø±ÙŠØ±ÙŠØ© Ù„Ø§Ø³ØªØ®Ø±Ø§Ø¬ Ø§Ù„Ø£Ø¯Ù„Ø© Ø§Ù„Ù…Ø±ØªØ¨Ø·Ø© Ø¨Ø§Ù„Ø§Ù„ØªÙ‡Ø§Ø¨ Ø§Ù„Ø±Ø¦ÙˆÙŠ.",
-    vitalFeature: "ØªØ­Ù„ÙŠÙ„ Ø§Ù„Ø¹Ù„Ø§Ù…Ø§Øª Ø§Ù„Ø­ÙŠÙˆÙŠØ©",
+      "تحليل الملاحظات السريرية لاستخراج الأدلة المرتبطة بالالتهاب الرئوي.",
+    vitalFeature: "تحليل العلامات الحيوية",
     vitalFeatureText:
-      "ØªØ­Ù„ÙŠÙ„ Ø§Ù„Ø¹Ù„Ø§Ù…Ø§Øª Ø§Ù„Ø­ÙŠÙˆÙŠØ© ÙƒØ£Ø¯Ù„Ø© Ø³Ø±ÙŠØ±ÙŠØ© Ù…Ù†Ø¸Ù…Ø©.",
+      "تحليل العلامات الحيوية كأدلة سريرية منظمة.",
     safetyShort:
-      "Ù„Ø¯Ø¹Ù… Ø§Ù„Ù‚Ø±Ø§Ø± Ø§Ù„Ø³Ø±ÙŠØ±ÙŠ ÙÙ‚Ø·. ÙŠØ¬Ø¨ Ù…Ø±Ø§Ø¬Ø¹Ø© Ø§Ù„Ù†ØªØ§Ø¦Ø¬ ÙˆØªØ£ÙƒÙŠØ¯Ù‡Ø§ Ø¨ÙˆØ§Ø³Ø·Ø© Ù…Ø®ØªØµ Ù…Ø¤Ù‡Ù„.",
-    release: "Ø§Ù„Ø¥ØµØ¯Ø§Ø± Ø§Ù„Ø¥Ù†ØªØ§Ø¬ÙŠ Ø§Ù„Ø£ÙˆÙ„",
+      "لدعم القرار السريري فقط. يجب مراجعة النتائج وتأكيدها بواسطة مختص مؤهل.",
+    release: "الإصدار الإنتاجي الأول",
 
-    patientManagement: "Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„Ù…Ø±Ø¶Ù‰",
-    newAssessment: "Ø¨Ø¯Ø¡ ØªÙ‚ÙŠÙŠÙ… Ø¬Ø¯ÙŠØ¯",
+    patientManagement: "إدارة المرضى",
+    newAssessment: "بدء تقييم جديد",
     patientSelectionText:
-      "Ø£Ù†Ø´Ø¦ Ø­Ø§Ù„Ø© Ù…Ø±ÙŠØ¶ Ø¬Ø¯ÙŠØ¯Ø© Ø£Ùˆ ØªØ§Ø¨Ø¹ Ø¨Ø§Ø³ØªØ®Ø¯Ø§Ù… Ø³Ø¬Ù„ Ù…ÙˆØ¬ÙˆØ¯.",
-    newPatient: "Ù…Ø±ÙŠØ¶ Ø¬Ø¯ÙŠØ¯",
-    createPatient: "Ø¥Ù†Ø´Ø§Ø¡ Ù…Ø±ÙŠØ¶ Ø¬Ø¯ÙŠØ¯",
+      "أنشئ حالة مريض جديدة أو تابع باستخدام سجل موجود.",
+    newPatient: "مريض جديد",
+    createPatient: "إنشاء مريض جديد",
     createPatientText:
-      "Ø£Ù†Ø´Ø¦ Ù…Ù„Ù Ø§Ù„Ù…Ø±ÙŠØ¶ ÙˆØ§Ø¨Ø¯Ø£ ØªÙ‚ÙŠÙŠÙ…Ù‹Ø§ Ø¬Ø¯ÙŠØ¯Ù‹Ø§.",
-    continue: "Ù…ØªØ§Ø¨Ø¹Ø©",
-    existingPatient: "Ù…Ø±ÙŠØ¶ Ù…ÙˆØ¬ÙˆØ¯",
-    openExisting: "ÙØªØ­ Ù…Ø±ÙŠØ¶ Ù…ÙˆØ¬ÙˆØ¯",
+      "أنشئ ملف المريض وابدأ تقييمًا جديدًا.",
+    continue: "متابعة",
+    existingPatient: "مريض موجود",
+    openExisting: "فتح مريض موجود",
     existingText:
-      "Ø§Ø¨Ø­Ø« ÙÙŠ Ø³Ø¬Ù„Ø§Øª Ø§Ù„Ù…Ø±Ø¶Ù‰ ÙˆØ±Ø§Ø¬Ø¹ Ø§Ù„ØªÙ‚ÙŠÙŠÙ…Ø§Øª ÙˆØ§Ù„ØªØ§Ø±ÙŠØ® Ø§Ù„Ø³Ø±ÙŠØ±ÙŠ.",
-    searchPatient: "Ø§Ù„Ø¨Ø­Ø« Ø¹Ù† Ù…Ø±ÙŠØ¶",
+      "ابحث في سجلات المرضى وراجع التقييمات والتاريخ السريري.",
+    searchPatient: "البحث عن مريض",
     privacyNote:
-      "ÙŠØªÙ… Ø§Ù„ØªØ¹Ø§Ù…Ù„ Ù…Ø¹ Ù…Ø¹Ù„ÙˆÙ…Ø§Øª Ø§Ù„Ù…Ø±ÙŠØ¶ Ø¯Ø§Ø®Ù„ Ù†Ø¸Ø§Ù… PneumoCare AI.",
+      "يتم التعامل مع معلومات المريض داخل نظام PneumoCare AI.",
 
-    back: "Ø±Ø¬ÙˆØ¹",
-    newPatientBadge: "Ù…Ø±ÙŠØ¶ Ø¬Ø¯ÙŠØ¯",
-    createCase: "Ø¥Ù†Ø´Ø§Ø¡ Ø­Ø§Ù„Ø© Ù…Ø±ÙŠØ¶",
+    back: "رجوع",
+    newPatientBadge: "مريض جديد",
+    createCase: "إنشاء حالة مريض",
     basicInfo:
-      "Ø£Ø¯Ø®Ù„ Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª Ø§Ù„Ø£Ø³Ø§Ø³ÙŠØ© Ù„Ù„Ù…Ø±ÙŠØ¶ Ù„Ø¥Ù†Ø´Ø§Ø¡ Ø³Ø¬Ù„ Ø¬Ø¯ÙŠØ¯.",
-    patientName: "Ø§Ø³Ù… Ø§Ù„Ù…Ø±ÙŠØ¶",
-    enterPatientName: "Ø£Ø¯Ø®Ù„ Ø§Ø³Ù… Ø§Ù„Ù…Ø±ÙŠØ¶",
-    age: "Ø§Ù„Ø¹Ù…Ø±",
-    enterAge: "Ø£Ø¯Ø®Ù„ Ø§Ù„Ø¹Ù…Ø±",
-    sex: "Ø§Ù„Ø¬Ù†Ø³ Ø§Ù„Ø¨ÙŠÙˆÙ„ÙˆØ¬ÙŠ",
-    selectSex: "Ø§Ø®ØªØ± Ø§Ù„Ø¬Ù†Ø³ Ø§Ù„Ø¨ÙŠÙˆÙ„ÙˆØ¬ÙŠ",
-    male: "Ø°ÙƒØ±",
-    female: "Ø£Ù†Ø«Ù‰",
-    creating: "Ø¬Ø§Ø±Ù Ø¥Ù†Ø´Ø§Ø¡ Ø§Ù„Ù…Ø±ÙŠØ¶...",
-    createCaseButton: "Ø¥Ù†Ø´Ø§Ø¡ Ø­Ø§Ù„Ø© Ø§Ù„Ù…Ø±ÙŠØ¶",
+      "أدخل البيانات الأساسية للمريض لإنشاء سجل جديد.",
+    patientName: "اسم المريض",
+    enterPatientName: "أدخل اسم المريض",
+    age: "العمر",
+    enterAge: "أدخل العمر",
+    sex: "الجنس البيولوجي",
+    selectSex: "اختر الجنس البيولوجي",
+    male: "ذكر",
+    female: "أنثى",
+    creating: "جارٍ إنشاء المريض...",
+    createCaseButton: "إنشاء حالة المريض",
 
-    history: "Ø§Ù„ØªØ§Ø±ÙŠØ® Ø§Ù„Ø³Ø±ÙŠØ±ÙŠ",
-    historyBadge: "Ø³Ø¬Ù„ Ø§Ù„Ù…Ø±ÙŠØ¶",
-    historyTitle: "Ø§Ù„ØªØ§Ø±ÙŠØ® Ø§Ù„Ø³Ø±ÙŠØ±ÙŠ Ù„Ù„Ù…Ø±ÙŠØ¶",
+    history: "التاريخ السريري",
+    historyBadge: "سجل المريض",
+    historyTitle: "التاريخ السريري للمريض",
     historyIntro:
-      "Ø§Ø¨Ø­Ø« Ø¹Ù† Ù…Ø±ÙŠØ¶ Ù…ÙˆØ¬ÙˆØ¯ Ù„Ù…Ø±Ø§Ø¬Ø¹Ø© Ø§Ù„Ø²ÙŠØ§Ø±Ø§Øª ÙˆØ§Ù„ØªÙ‚ÙŠÙŠÙ…Ø§Øª Ø§Ù„Ø³Ø§Ø¨Ù‚Ø©.",
-    patientId: "Ø±Ù‚Ù… Ø§Ù„Ù…Ø±ÙŠØ¶",
-    patientIdPlaceholder: "Ø£Ø¯Ø®Ù„ Ø±Ù‚Ù… Ø§Ù„Ù…Ø±ÙŠØ¶",
-    patientIdRequired: "ÙŠØ±Ø¬Ù‰ Ø¥Ø¯Ø®Ø§Ù„ Ø±Ù‚Ù… Ø§Ù„Ù…Ø±ÙŠØ¶.",
-    lastPatientId: "Ø¢Ø®Ø± Ø±Ù‚Ù… Ù…Ø±ÙŠØ¶ Ù…Ø³ØªØ®Ø¯Ù…",
-    useLastId: "Ø§Ø³ØªØ®Ø¯Ù… Ù‡Ø°Ø§ Ø§Ù„Ø±Ù‚Ù…",
-    loadHistory: "Ø¹Ø±Ø¶ Ø§Ù„ØªØ§Ø±ÙŠØ® Ø§Ù„Ø³Ø±ÙŠØ±ÙŠ",
-    loadingHistory: "Ø¬Ø§Ø±Ù ØªØ­Ù…ÙŠÙ„ Ø§Ù„ØªØ§Ø±ÙŠØ®...",
+      "ابحث عن مريض موجود لمراجعة الزيارات والتقييمات السابقة.",
+    patientId: "رقم المريض",
+    patientIdPlaceholder: "أدخل رقم المريض",
+    patientIdRequired: "يرجى إدخال رقم المريض.",
+    lastPatientId: "آخر رقم مريض مستخدم",
+    useLastId: "استخدم هذا الرقم",
+    loadHistory: "عرض التاريخ السريري",
+    loadingHistory: "جارٍ تحميل التاريخ...",
     historyError:
-      "ØªØ¹Ø°Ø± ØªØ­Ù…ÙŠÙ„ Ø§Ù„ØªØ§Ø±ÙŠØ® Ø§Ù„Ø³Ø±ÙŠØ±ÙŠ Ù„Ù„Ù…Ø±ÙŠØ¶.",
+      "تعذر تحميل التاريخ السريري للمريض.",
     noHistory:
-      "Ù„Ù… ÙŠØªÙ… Ø§Ù„Ø¹Ø«ÙˆØ± Ø¹Ù„Ù‰ Ø²ÙŠØ§Ø±Ø§Øª Ø³Ø±ÙŠØ±ÙŠØ© Ø³Ø§Ø¨Ù‚Ø© Ù„Ù‡Ø°Ø§ Ø§Ù„Ù…Ø±ÙŠØ¶.",
-    visits: "Ø§Ù„Ø²ÙŠØ§Ø±Ø§Øª",
-    visit: "Ø²ÙŠØ§Ø±Ø©",
-    visitDate: "ØªØ§Ø±ÙŠØ® Ø§Ù„Ø²ÙŠØ§Ø±Ø©",
-    assessment: "Ø§Ù„ØªÙ‚ÙŠÙŠÙ…",
-    risk: "Ø§Ø­ØªÙ…Ø§Ù„ÙŠØ© Ø§Ù„Ø§Ù„ØªÙ‡Ø§Ø¨ Ø§Ù„Ø±Ø¦ÙˆÙŠ",
-    severity: "Ø§Ù„Ø´Ø¯Ø©",
-    clinicalNotes: "Ø§Ù„Ù…Ù„Ø§Ø­Ø¸Ø§Øª Ø§Ù„Ø³Ø±ÙŠØ±ÙŠØ©",
-    vitals: "Ø§Ù„Ø¹Ù„Ø§Ù…Ø§Øª Ø§Ù„Ø­ÙŠÙˆÙŠØ©",
-    cbc: "Ù†ØªØ§Ø¦Ø¬ Ø§Ù„Ù…Ø®ØªØ¨Ø± â€” CBC",
-    xray: "Ø£Ø´Ø¹Ø© Ø§Ù„ØµØ¯Ø±",
-    noData: "ØºÙŠØ± Ù…ØªØ§Ø­",
-    newVisit: "Ø¨Ø¯Ø¡ Ø²ÙŠØ§Ø±Ø© Ø¬Ø¯ÙŠØ¯Ø©",
-    patientProfile: "Ø¨ÙŠØ§Ù†Ø§Øª Ø§Ù„Ù…Ø±ÙŠØ¶",
-    viewHistory: "Ø¹Ø±Ø¶ Ø§Ù„ØªØ§Ø±ÙŠØ®",
+      "لم يتم العثور على زيارات سريرية سابقة لهذا المريض.",
+    visits: "الزيارات",
+    visit: "زيارة",
+    visitDate: "تاريخ الزيارة",
+    assessment: "التقييم",
+    risk: "احتمالية الالتهاب الرئوي",
+    severity: "الشدة",
+    clinicalNotes: "الملاحظات السريرية",
+    vitals: "العلامات الحيوية",
+    cbc: "نتائج المختبر — CBC",
+    xray: "أشعة الصدر",
+    noData: "غير متاح",
+    newVisit: "بدء زيارة جديدة",
+    patientProfile: "بيانات المريض",
+    viewHistory: "عرض التاريخ",
 
-    assessmentBadge: "Ø§Ù„ØªÙ‚ÙŠÙŠÙ… Ø§Ù„Ø³Ø±ÙŠØ±ÙŠ",
-    assessmentTitle: "ØªÙ‚ÙŠÙŠÙ… Ø§Ù„Ø§Ù„ØªÙ‡Ø§Ø¨ Ø§Ù„Ø±Ø¦ÙˆÙŠ",
+    assessmentBadge: "التقييم السريري",
+    assessmentTitle: "تقييم الالتهاب الرئوي",
     assessmentText:
-      "Ø£Ø¯Ø®Ù„ Ø§Ù„Ù…Ø¹Ù„ÙˆÙ…Ø§Øª Ø§Ù„Ø³Ø±ÙŠØ±ÙŠØ© Ø§Ù„Ù…ØªØ§Ø­Ø© ÙˆØ£Ø´Ø¹Ø© Ø§Ù„ØµØ¯Ø± Ù„Ø¥Ø¬Ø±Ø§Ø¡ Ø§Ù„ØªÙ‚ÙŠÙŠÙ… Ø¨Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ.",
-    clinicalInfo: "Ø§Ù„Ù…Ø¹Ù„ÙˆÙ…Ø§Øª Ø§Ù„Ø³Ø±ÙŠØ±ÙŠØ©",
+      "أدخل المعلومات السريرية المتاحة وأشعة الصدر لإجراء التقييم بالذكاء الاصطناعي.",
+    clinicalInfo: "المعلومات السريرية",
     clinicalInfoDesc:
-      "Ø£Ø¯Ø®Ù„ Ø§Ù„Ø¹Ù„Ø§Ù…Ø§Øª Ø§Ù„Ø³Ø±ÙŠØ±ÙŠØ© ÙˆØ§Ù„Ø¹Ù„Ø§Ù…Ø§Øª Ø§Ù„Ø­ÙŠÙˆÙŠØ© Ø§Ù„Ù…ØªØ§Ø­Ø©.",
-    temperature: "Ø¯Ø±Ø¬Ø© Ø§Ù„Ø­Ø±Ø§Ø±Ø© (Â°C)",
-    heartRate: "Ù…Ø¹Ø¯Ù„ Ø¶Ø±Ø¨Ø§Øª Ø§Ù„Ù‚Ù„Ø¨ (Ù†Ø¨Ø¶Ø©/Ø¯Ù‚ÙŠÙ‚Ø©)",
-    oxygen: "ØªØ´Ø¨Ø¹ Ø§Ù„Ø£ÙƒØ³Ø¬ÙŠÙ† (%)",
-    required: "Ù…Ø·Ù„ÙˆØ¨",
+      "أدخل العلامات السريرية والعلامات الحيوية المتاحة.",
+    temperature: "درجة الحرارة (°C)",
+    heartRate: "معدل ضربات القلب (نبضة/دقيقة)",
+    oxygen: "تشبع الأكسجين (%)",
+    required: "مطلوب",
     notesPlaceholder:
-      "Ø£Ø¯Ø®Ù„ Ø§Ù„Ø£Ø¹Ø±Ø§Ø¶ØŒ Ù†ØªØ§Ø¦Ø¬ Ø§Ù„ÙØ­ØµØŒ Ø§Ù„Ø¹Ù„Ø§Ù…Ø§Øª Ø§Ù„ØªÙ†ÙØ³ÙŠØ©ØŒ Ù…Ø¯Ø© Ø§Ù„Ø­Ù…Ù‰ ÙˆØ§Ù„Ø³Ø¹Ø§Ù„ ÙˆØ£ÙŠ Ù…Ù„Ø§Ø­Ø¸Ø§Øª Ù…Ù‡Ù…Ø© Ø£Ø®Ø±Ù‰.",
-    cbcDesc: "Ù…Ø¹Ù„ÙˆÙ…Ø§Øª Ù…Ø®Ø¨Ø±ÙŠØ© Ø§Ø®ØªÙŠØ§Ø±ÙŠØ©.",
-    wbc: "ÙƒØ±ÙŠØ§Øª Ø§Ù„Ø¯Ù… Ø§Ù„Ø¨ÙŠØ¶Ø§Ø¡ WBC",
-    neutrophils: "Ø§Ù„Ø¹Ø¯Ù„Ø§Øª (%)",
-    lymphocytes: "Ø§Ù„Ø®Ù„Ø§ÙŠØ§ Ø§Ù„Ù„Ù…ÙØ§ÙˆÙŠØ© (%)",
-    hemoglobin: "Ø§Ù„Ù‡ÙŠÙ…ÙˆØ¬Ù„ÙˆØ¨ÙŠÙ†",
-    platelets: "Ø§Ù„ØµÙØ§Ø¦Ø­ Ø§Ù„Ø¯Ù…ÙˆÙŠØ©",
+      "أدخل الأعراض، نتائج الفحص، العلامات التنفسية، مدة الحمى والسعال وأي ملاحظات مهمة أخرى.",
+    cbcDesc: "معلومات مخبرية اختيارية.",
+    wbc: "كريات الدم البيضاء WBC",
+    neutrophils: "العدلات (%)",
+    lymphocytes: "الخلايا اللمفاوية (%)",
+    hemoglobin: "الهيموجلوبين",
+    platelets: "الصفائح الدموية",
     cbcNote:
-      "Ù‚ÙŠÙ… CBC Ù…Ø¹Ù„ÙˆÙ…Ø§Øª Ø³Ø±ÙŠØ±ÙŠØ© Ø§Ø®ØªÙŠØ§Ø±ÙŠØ© ÙˆÙŠÙ…ÙƒÙ† Ø­ÙØ¸Ù‡Ø§ Ù…Ø¹ Ø§Ù„ØªÙ‚ÙŠÙŠÙ….",
-    chestXray: "Ø£Ø´Ø¹Ø© Ø§Ù„ØµØ¯Ø±",
+      "قيم CBC معلومات سريرية اختيارية ويمكن حفظها مع التقييم.",
+    chestXray: "أشعة الصدر",
     xrayDesc:
-      "Ø§Ø±ÙØ¹ ØµÙˆØ±Ø© Ø£Ø´Ø¹Ø© Ø¨ØµÙŠØºØ© PNG Ø£Ùˆ JPG Ø£Ùˆ JPEG Ø£Ùˆ WEBP.",
-    upload: "Ø±ÙØ¹ Ø£Ø´Ø¹Ø© Ø§Ù„ØµØ¯Ø±",
-    formats: "PNG Ø£Ùˆ JPG Ø£Ùˆ JPEG Ø£Ùˆ WEBP",
-    selected: "ØªÙ… Ø§Ø®ØªÙŠØ§Ø± Ø§Ù„Ø£Ø´Ø¹Ø© Ø¨Ù†Ø¬Ø§Ø­",
-    cancel: "Ø¥Ù„ØºØ§Ø¡",
-    runAssessment: "ØªØ´ØºÙŠÙ„ PneumoCare AI",
-    running: "Ø¬Ø§Ø±Ù Ø¥Ø¬Ø±Ø§Ø¡ Ø§Ù„ØªÙ‚ÙŠÙŠÙ…...",
-    assessmentError: "Ø®Ø·Ø£ ÙÙŠ Ø§Ù„ØªÙ‚ÙŠÙŠÙ…",
-    complete: "Ø§ÙƒØªÙ…Ù„ Ø§Ù„ØªÙ‚ÙŠÙŠÙ…",
+      "ارفع صورة أشعة بصيغة PNG أو JPG أو JPEG أو WEBP.",
+    upload: "رفع أشعة الصدر",
+    formats: "PNG أو JPG أو JPEG أو WEBP",
+    selected: "تم اختيار الأشعة بنجاح",
+    cancel: "إلغاء",
+    runAssessment: "تشغيل PneumoCare AI",
+    running: "جارٍ إجراء التقييم...",
+    assessmentError: "خطأ في التقييم",
+    complete: "اكتمل التقييم",
 
-    resultTitle: "Ù†ØªÙŠØ¬Ø© ØªÙ‚ÙŠÙŠÙ… PneumoCare AI",
+    resultTitle: "نتيجة تقييم PneumoCare AI",
     resultText:
-      "ØªÙ‚ÙŠÙŠÙ… Ù…ØªÙƒØ§Ù…Ù„ ÙŠØ¹ØªÙ…Ø¯ Ø¹Ù„Ù‰ Ø§Ù„Ù…Ø¹Ù„ÙˆÙ…Ø§Øª Ø§Ù„Ø³Ø±ÙŠØ±ÙŠØ© ÙˆØ§Ù„Ø¹Ù„Ø§Ù…Ø§Øª Ø§Ù„Ø­ÙŠÙˆÙŠØ© ÙˆØ£Ø¯Ù„Ø© Ø£Ø´Ø¹Ø© Ø§Ù„ØµØ¯Ø± Ø§Ù„Ù…ØªØ§Ø­Ø©.",
-    overall: "Ø§Ù„ØªÙ‚ÙŠÙŠÙ… Ø§Ù„Ù†Ù‡Ø§Ø¦ÙŠ Ø§Ù„Ù…Ø¯Ù…Ø¬",
+      "تقييم متكامل يعتمد على المعلومات السريرية والعلامات الحيوية وأدلة أشعة الصدر المتاحة.",
+    overall: "التقييم النهائي المدمج",
 
-    normal: "Ø·Ø¨ÙŠØ¹ÙŠ",
-    pneumonia: "Ø§Ù„ØªÙ‡Ø§Ø¨ Ø±Ø¦ÙˆÙŠ",
+    normal: "طبيعي",
+    pneumonia: "التهاب رئوي",
 
     overallRiskContext:
-      "Ø¨Ù†Ø§Ø¡Ù‹ Ø¹Ù„Ù‰ Ø§Ù„Ù…Ù„Ø§Ø­Ø¸Ø§Øª Ø§Ù„Ø³Ø±ÙŠØ±ÙŠØ© ÙˆÙ†ØªØ§Ø¦Ø¬ Ø§Ù„Ù…Ø®ØªØ¨Ø±",
+      "بناءً على الملاحظات السريرية ونتائج المختبر",
 
-    normalLikelihood: "Ø§Ø­ØªÙ…Ø§Ù„ÙŠØ© Ø§Ù„Ø­Ø§Ù„Ø© Ø§Ù„Ø·Ø¨ÙŠØ¹ÙŠØ©",
-    riskLevel: "Ù…Ø³ØªÙˆÙ‰ Ø§Ù„Ø®Ø·ÙˆØ±Ø© Ø§Ù„Ø³Ø±ÙŠØ±ÙŠ",
-    low: "Ù…Ù†Ø®ÙØ¶",
-    moderate: "Ù…ØªÙˆØ³Ø·",
-    high: "Ù…Ø±ØªÙØ¹",
+    normalLikelihood: "احتمالية الحالة الطبيعية",
+    riskLevel: "مستوى الخطورة السريري",
+    low: "منخفض",
+    moderate: "متوسط",
+    high: "مرتفع",
 
-    evidence: "Ø£Ø¯Ù„Ø© Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ",
-    evidenceTitle: "Ø§Ù„Ø£Ø¯Ù„Ø© Ø§Ù„Ù…ØªØ§Ø­Ø©",
-    analyzed: "ØªÙ… Ø§Ù„ØªØ­Ù„ÙŠÙ„",
-    unavailable: "ØºÙŠØ± Ù…ØªØ§Ø­",
-    clinicalEvidence: "Ø§Ù„Ù…Ø¹Ù„ÙˆÙ…Ø§Øª Ø§Ù„Ø³Ø±ÙŠØ±ÙŠØ©",
-    vitalEvidence: "Ø§Ù„Ø¹Ù„Ø§Ù…Ø§Øª Ø§Ù„Ø­ÙŠÙˆÙŠØ©",
-    xrayEvidence: "Ø£Ø´Ø¹Ø© Ø§Ù„ØµØ¯Ø±",
+    evidence: "أدلة الذكاء الاصطناعي",
+    evidenceTitle: "الأدلة المتاحة",
+    analyzed: "تم التحليل",
+    unavailable: "غير متاح",
+    clinicalEvidence: "المعلومات السريرية",
+    vitalEvidence: "العلامات الحيوية",
+    xrayEvidence: "أشعة الصدر",
     xraySeparate:
-      "ÙŠØªÙ… Ø¹Ø±Ø¶ ÙƒÙ„ Ù…ØµØ¯Ø± Ø¨Ø´ÙƒÙ„ Ù…Ø³ØªÙ‚Ù„ Ø­ØªÙ‰ ØªØ¸Ù„ Ø§Ù„Ù†ØªÙŠØ¬Ø© Ø§Ù„Ø³Ø±ÙŠØ±ÙŠØ© ÙˆÙ†ØªÙŠØ¬Ø© Ø£Ø´Ø¹Ø© Ø§Ù„ØµØ¯Ø± ÙˆØ§Ø¶Ø­ØªÙŠÙ† ÙˆÙ‚Ø§Ø¨Ù„ØªÙŠÙ† Ù„Ù„ØªÙØ³ÙŠØ± Ø¨Ø´ÙƒÙ„ Ù…Ù†ÙØµÙ„.",
-    clinicalFinal: "Ø§Ù„Ù†ØªÙŠØ¬Ø© Ø§Ù„Ù†Ù‡Ø§Ø¦ÙŠØ© Ù„Ù„Ù…Ø¹Ù„ÙˆÙ…Ø§Øª Ø§Ù„Ø³Ø±ÙŠØ±ÙŠØ©",
-    clinicalSources: "Ø§Ù„Ù…Ù„Ø§Ø­Ø¸Ø§Øª Ø§Ù„Ø³Ø±ÙŠØ±ÙŠØ© + Ø§Ù„Ø¹Ù„Ø§Ù…Ø§Øª Ø§Ù„Ø­ÙŠÙˆÙŠØ© + Ù†ØªØ§Ø¦Ø¬ Ø§Ù„Ù…Ø®ØªØ¨Ø±",
-    xrayFinal: "Ø§Ù„Ù†ØªÙŠØ¬Ø© Ø§Ù„Ù†Ù‡Ø§Ø¦ÙŠØ© Ù„Ø£Ø´Ø¹Ø© Ø§Ù„ØµØ¯Ø±",
-    xraySource: "ØªØ­Ù„ÙŠÙ„ Ø£Ø´Ø¹Ø© Ø§Ù„ØµØ¯Ø± Ø¨Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ",
-    pneumoniaProbability: "Ø§Ø­ØªÙ…Ø§Ù„ÙŠØ© Ø§Ù„Ø§Ù„ØªÙ‡Ø§Ø¨ Ø§Ù„Ø±Ø¦ÙˆÙŠ",
-    normalProbability: "Ø§Ø­ØªÙ…Ø§Ù„ÙŠØ© Ø§Ù„Ø­Ø§Ù„Ø© Ø§Ù„Ø·Ø¨ÙŠØ¹ÙŠØ©",
-    sourceEstimateNote: "ØªÙ‚Ø¯ÙŠØ± Ø§Ù„Ù†Ù…ÙˆØ°Ø¬ Ø¨Ù†Ø§Ø¡Ù‹ Ø¹Ù„Ù‰ Ù…ØµØ¯Ø± Ø§Ù„Ø£Ø¯Ù„Ø© Ù‡Ø°Ø§",
+      "يتم عرض كل مصدر بشكل مستقل حتى تظل النتيجة السريرية ونتيجة أشعة الصدر واضحتين وقابلتين للتفسير بشكل منفصل.",
+    clinicalFinal: "النتيجة النهائية للمعلومات السريرية",
+    clinicalSources: "الملاحظات السريرية + العلامات الحيوية + نتائج المختبر",
+    xrayFinal: "النتيجة النهائية لأشعة الصدر",
+    xraySource: "تحليل أشعة الصدر بالذكاء الاصطناعي",
+    pneumoniaProbability: "احتمالية الالتهاب الرئوي",
+    normalProbability: "احتمالية الحالة الطبيعية",
+    sourceEstimateNote: "تقدير النموذج بناءً على مصدر الأدلة هذا",
 
-    reasoning: "Ù…Ù†Ø·Ù‚ ÙˆØ£Ø¯Ù„Ø© Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ",
-    reasoningTitle: "Ù„Ù…Ø§Ø°Ø§ Ø¸Ù‡Ø±Øª Ù‡Ø°Ù‡ Ø§Ù„Ù†ØªÙŠØ¬Ø©ØŸ",
+    reasoning: "منطق وأدلة الذكاء الاصطناعي",
+    reasoningTitle: "لماذا ظهرت هذه النتيجة؟",
     reasoningText:
-      "ÙŠØ¹ØªÙ…Ø¯ Ø§Ù„ØªÙ‚ÙŠÙŠÙ… Ø§Ù„Ù†Ù‡Ø§Ø¦ÙŠ Ø¹Ù„Ù‰ Ø§Ù„Ù…Ø¹Ù„ÙˆÙ…Ø§Øª Ø§Ù„Ø³Ø±ÙŠØ±ÙŠØ© ÙˆØ§Ù„Ø¹Ù„Ø§Ù…Ø§Øª Ø§Ù„Ø­ÙŠÙˆÙŠØ© Ø§Ù„Ù…ØªØ§Ø­Ø©ØŒ Ø¨ÙŠÙ†Ù…Ø§ ØªÙˆÙØ± Ø£Ø´Ø¹Ø© Ø§Ù„ØµØ¯Ø± Ø¯Ù„ÙŠÙ„Ù‹Ø§ ØªØµÙˆÙŠØ±ÙŠÙ‹Ø§ Ø¥Ø¶Ø§ÙÙŠÙ‹Ø§ Ù…Ø³ØªÙ‚Ù„Ù‹Ø§.",
-    conflictTitle: "Ø§Ø®ØªÙ„Ø§Ù Ù…Ù‡Ù… Ø¨ÙŠÙ† Ø§Ù„Ø£Ø¯Ù„Ø©",
+      "يعتمد التقييم النهائي على المعلومات السريرية والعلامات الحيوية المتاحة، بينما توفر أشعة الصدر دليلًا تصويريًا إضافيًا مستقلًا.",
+    conflictTitle: "اختلاف مهم بين الأدلة",
     conflictText:
-      "ØªØ®ØªÙ„Ù Ù†ØªÙŠØ¬Ø© Ø£Ø´Ø¹Ø© Ø§Ù„ØµØ¯Ø± Ø¹Ù† Ø§Ù„ØªÙ‚ÙŠÙŠÙ… Ø§Ù„Ø³Ø±ÙŠØ±ÙŠ Ø§Ù„Ù†Ù‡Ø§Ø¦ÙŠ. ÙŠØ¬Ø¨ Ù…Ø±Ø§Ø¬Ø¹Ø© Ù‡Ø°Ø§ Ø§Ù„Ø§Ø®ØªÙ„Ø§Ù Ù…Ø¹ Ø§Ù„ØµÙˆØ±Ø© Ø§Ù„Ø³Ø±ÙŠØ±ÙŠØ© Ø§Ù„ÙƒØ§Ù…Ù„Ø© Ù„Ù„Ù…Ø±ÙŠØ¶.",
+      "تختلف نتيجة أشعة الصدر عن التقييم السريري النهائي. يجب مراجعة هذا الاختلاف مع الصورة السريرية الكاملة للمريض.",
 
-    imagingExplanation: "Ø§Ù„ØªÙØ³ÙŠØ± Ø§Ù„ØªØµÙˆÙŠØ±ÙŠ",
-    imagingTitle: "ØªÙØ³ÙŠØ± Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ Ù„Ø£Ø´Ø¹Ø© Ø§Ù„ØµØ¯Ø±",
+    imagingExplanation: "التفسير التصويري",
+    imagingTitle: "تفسير الذكاء الاصطناعي لأشعة الصدر",
     imagingText:
-      "ØªÙˆØ¶Ø­ Ø®Ø±ÙŠØ·Ø© Ø§Ù„Ø§Ù†ØªØ¨Ø§Ù‡ Ù…Ù†Ø§Ø·Ù‚ Ø§Ù„ØµÙˆØ±Ø© Ø§Ù„ØªÙŠ Ø£Ø«Ø±Øª ÙÙŠ ØªÙˆÙ‚Ø¹ Ù†Ù…ÙˆØ°Ø¬ Ø§Ù„Ø£Ø´Ø¹Ø©. ÙˆÙ‡ÙŠ Ø£Ø¯Ø§Ø© Ù„Ù„ØªÙØ³ÙŠØ± ÙˆÙ„ÙŠØ³Øª Ø¯Ù„ÙŠÙ„Ù‹Ø§ Ù…Ø¤ÙƒØ¯Ù‹Ø§ Ø¹Ù„Ù‰ ÙˆØ¬ÙˆØ¯ Ø§Ù„Ù…Ø±Ø¶.",
-    originalXray: "Ø£Ø´Ø¹Ø© Ø§Ù„ØµØ¯Ø± Ø§Ù„Ø£ØµÙ„ÙŠØ©",
-    attentionMap: "Ø®Ø±ÙŠØ·Ø© Ø§Ù†ØªØ¨Ø§Ù‡ Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ",
+      "توضح خريطة الانتباه مناطق الصورة التي أثرت في توقع نموذج الأشعة. وهي أداة للتفسير وليست دليلًا مؤكدًا على وجود المرض.",
+    originalXray: "أشعة الصدر الأصلية",
+    attentionMap: "خريطة انتباه الذكاء الاصطناعي",
     imageUnavailable:
-      "ØªÙ… Ø­ÙØ¸ Ø§Ù„ØµÙˆØ±Ø© Ø§Ù„Ø£ØµÙ„ÙŠØ© Ù…Ø¹ ØªÙ‚ÙŠÙŠÙ… Ø§Ù„Ù…Ø±ÙŠØ¶.",
+      "تم حفظ الصورة الأصلية مع تقييم المريض.",
     gradUnavailable:
-      "Ø®Ø±ÙŠØ·Ø© Ø§Ù„Ø§Ù†ØªØ¨Ø§Ù‡ ØºÙŠØ± Ù…ØªØ§Ø­Ø© Ù„Ù‡Ø°Ø§ Ø§Ù„ØªÙ‚ÙŠÙŠÙ….",
-    prediction: "ØªÙ‚ÙŠÙŠÙ… Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ",
-    likelihood: "Ø§Ø­ØªÙ…Ø§Ù„ÙŠØ© Ø§Ù„Ø§Ù„ØªÙ‡Ø§Ø¨ Ø§Ù„Ø±Ø¦ÙˆÙŠ",
-    interpretation: "ÙƒÙŠÙÙŠØ© Ù‚Ø±Ø§Ø¡Ø© Ø§Ù„ØµÙˆØ±Ø©",
+      "خريطة الانتباه غير متاحة لهذا التقييم.",
+    prediction: "تقييم الذكاء الاصطناعي",
+    likelihood: "احتمالية الالتهاب الرئوي",
+    interpretation: "كيفية قراءة الصورة",
 
-    severitySection: "Ø§Ù„ØªÙ‚ÙŠÙŠÙ… Ø§Ù„Ø³Ø±ÙŠØ±ÙŠ",
-    severityTitle: "ØªÙ‚ÙŠÙŠÙ… Ø´Ø¯Ø© Ø§Ù„Ø­Ø§Ù„Ø©",
-    severityLevel: "Ù…Ø³ØªÙˆÙ‰ Ø§Ù„Ø´Ø¯Ø©",
-    signals: "Ø§Ù„Ù…Ø¤Ø´Ø±Ø§Øª Ø§Ù„Ø³Ø±ÙŠØ±ÙŠØ©",
+    severitySection: "التقييم السريري",
+    severityTitle: "تقييم شدة الحالة",
+    severityLevel: "مستوى الشدة",
+    signals: "المؤشرات السريرية",
     noHighRisk:
-      "Ù„Ù… ÙŠØªÙ… ØªØ­Ø¯ÙŠØ¯ Ù…Ø¤Ø´Ø±Ø§Øª Ø³Ø±ÙŠØ±ÙŠØ© Ø¹Ø§Ù„ÙŠØ© Ø§Ù„Ø®Ø·ÙˆØ±Ø©.",
+      "لم يتم تحديد مؤشرات سريرية عالية الخطورة.",
 
-    considerations: "Ø§Ø¹ØªØ¨Ø§Ø±Ø§Øª Ø³Ø±ÙŠØ±ÙŠØ©",
-    considerationsTitle: "Ù…Ø§ Ø§Ù„Ø°ÙŠ ÙŠÙ†Ø¨ØºÙŠ Ù…Ø±Ø§Ø¹Ø§ØªÙ‡ØŸ",
+    considerations: "اعتبارات سريرية",
+    considerationsTitle: "ما الذي ينبغي مراعاته؟",
 
-    safetyTitle: "Ù„Ù„Ø¯Ø¹Ù… Ø§Ù„Ø³Ø±ÙŠØ±ÙŠ ÙÙ‚Ø·",
+    safetyTitle: "للدعم السريري فقط",
     safetyText:
-      "PneumoCare AI Ù†Ø¸Ø§Ù… Ù…Ø³Ø§Ø¹Ø¯ Ù„Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ Ø§Ù„Ø·Ø¨ÙŠ. ÙŠØ¬Ø¨ Ù…Ø±Ø§Ø¬Ø¹Ø© Ø§Ù„Ù†ØªØ§Ø¦Ø¬ ÙˆØªØ£ÙƒÙŠØ¯Ù‡Ø§ Ø¨ÙˆØ§Ø³Ø·Ø© Ø·Ø¨ÙŠØ¨ Ø£Ùˆ Ù…Ø®ØªØµ Ù…Ø¤Ù‡Ù„. Ù„Ø§ ÙŠÙ‚Ø¯Ù… Ø§Ù„Ù†Ø¸Ø§Ù… ÙˆØµÙØ§Øª Ø¯ÙˆØ§Ø¦ÙŠØ© Ù…Ø³ØªÙ‚Ù„Ø© Ø£Ùˆ Ø¬Ø±Ø¹Ø§Øª Ù„Ù„Ù…Ø¶Ø§Ø¯Ø§Øª Ø§Ù„Ø­ÙŠÙˆÙŠØ© Ø£Ùˆ Ù‚Ø±Ø§Ø±Ø§Øª Ø¹Ù„Ø§Ø¬ÙŠØ© Ø°Ø§ØªÙŠØ©.",
+      "PneumoCare AI نظام مساعد للذكاء الاصطناعي الطبي. يجب مراجعة النتائج وتأكيدها بواسطة طبيب أو مختص مؤهل. لا يقدم النظام وصفات دوائية مستقلة أو جرعات للمضادات الحيوية أو قرارات علاجية ذاتية.",
 
-    unknown: "ØºÙŠØ± Ù…Ø¹Ø±ÙˆÙ",
-    noPatient: "Ù„Ù… ÙŠØªÙ… Ø§Ø®ØªÙŠØ§Ø± Ø­Ø§Ù„Ø© Ù…Ø±ÙŠØ¶.",
+    unknown: "غير معروف",
+    noPatient: "لم يتم اختيار حالة مريض.",
     notesRequired:
-      "Ø§Ù„Ù…Ù„Ø§Ø­Ø¸Ø§Øª Ø§Ù„Ø³Ø±ÙŠØ±ÙŠØ© Ù…Ø·Ù„ÙˆØ¨Ø© Ù„Ø¥Ø¬Ø±Ø§Ø¡ Ø§Ù„ØªÙ‚ÙŠÙŠÙ….",
+      "الملاحظات السريرية مطلوبة لإجراء التقييم.",
     xrayRequired:
-      "ÙŠØ±Ø¬Ù‰ Ø±ÙØ¹ Ø£Ø´Ø¹Ø© Ø§Ù„ØµØ¯Ø± Ù‚Ø¨Ù„ Ø¥Ø¬Ø±Ø§Ø¡ Ø§Ù„ØªÙ‚ÙŠÙŠÙ….",
+      "يرجى رفع أشعة الصدر قبل إجراء التقييم.",
     backendError:
-      "ØªØ¹Ø°Ø± Ø§Ù„Ø§ØªØµØ§Ù„ Ø¨Ø®Ø§Ø¯Ù… PneumoCare AI.",
+      "تعذر الاتصال بخادم PneumoCare AI.",
     assessmentBackendError:
-      "ØªØ¹Ø°Ø± Ø§Ù„Ø§ØªØµØ§Ù„ Ø¨Ù…Ø­Ø±Ùƒ Ø§Ù„ØªÙ‚ÙŠÙŠÙ… Ø¨Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ.",
+      "تعذر الاتصال بمحرك التقييم بالذكاء الاصطناعي.",
 
-    treatment: "Ø§Ù„Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„Ø¹Ù„Ø§Ø¬ÙŠØ©",
-    treatmentTitle: "Ø®Ø·Ø© Ø§Ù„Ø¹Ù„Ø§Ø¬",
+    treatment: "الإدارة العلاجية",
+    treatmentTitle: "خطة العلاج",
     treatmentIntro:
-      "Ø®Ø·Ø© Ø¹Ù„Ø§Ø¬ÙŠØ© Ù…Ù†Ø¸Ù…Ø© Ù…Ø¨Ù†ÙŠØ© Ø¹Ù„Ù‰ Ø§Ù„ØªÙ‚ÙŠÙŠÙ… Ø§Ù„Ø³Ø±ÙŠØ±ÙŠ Ø§Ù„Ø­Ø§Ù„ÙŠ.",
-    medication: "Ø§Ù„Ø¯ÙˆØ§Ø¡",
-    medications: "Ø§Ù„Ø£Ø¯ÙˆÙŠØ©",
+      "خطة علاجية منظمة مبنية على التقييم السريري الحالي.",
+    medication: "الدواء",
+    medications: "الأدوية",
     noMedication:
-      "Ù„Ø§ ØªÙˆØ¬Ø¯ ØªÙˆØµÙŠØ© Ø¯ÙˆØ§Ø¦ÙŠØ© Ø±ÙˆØªÙŠÙ†ÙŠØ© Ø­Ø§Ù„ÙŠÙ‹Ø§.",
-    supportiveCare: "Ø§Ù„Ø±Ø¹Ø§ÙŠØ© Ø§Ù„Ø¯Ø§Ø¹Ù…Ø©",
-    monitoring: "Ø§Ù„Ù…ØªØ§Ø¨Ø¹Ø© ÙˆØ§Ù„Ù…Ø±Ø§Ù‚Ø¨Ø©",
-    clinicalStatus: "Ø§Ù„Ø­Ø§Ù„Ø© Ø§Ù„Ø³Ø±ÙŠØ±ÙŠØ©",
-    redFlags: "Ø¹Ù„Ø§Ù…Ø§Øª ØªØ³ØªØ¯Ø¹ÙŠ Ø§Ù„Ø§Ù†ØªØ¨Ø§Ù‡",
-    clinicianReview: "Ù…Ø±Ø§Ø¬Ø¹Ø© Ø§Ù„Ø·Ø¨ÙŠØ¨",
-    recommended: "Ù…ÙˆØµÙ‰ Ø¨Ù‡",
-    urgent: "Ù…Ø±Ø§Ø¬Ø¹Ø© Ø³Ø±ÙŠØ±ÙŠØ© Ø¹Ø§Ø¬Ù„Ø©",
-    clinicianReviewStatus: "ØªØªØ·Ù„Ø¨ Ù…Ø±Ø§Ø¬Ø¹Ø© Ø§Ù„Ø·Ø¨ÙŠØ¨",
+      "لا توجد توصية دوائية روتينية حاليًا.",
+    supportiveCare: "الرعاية الداعمة",
+    monitoring: "المتابعة والمراقبة",
+    clinicalStatus: "الحالة السريرية",
+    redFlags: "علامات تستدعي الانتباه",
+    clinicianReview: "مراجعة الطبيب",
+    recommended: "موصى به",
+    urgent: "مراجعة سريرية عاجلة",
+    clinicianReviewStatus: "تتطلب مراجعة الطبيب",
     treatmentUnavailable:
-      "Ù„Ø§ ØªÙˆØ¬Ø¯ Ø®Ø·Ø© Ø¹Ù„Ø§Ø¬ÙŠØ© Ù…ØªØ§Ø­Ø© Ù„Ù‡Ø°Ø§ Ø§Ù„ØªÙ‚ÙŠÙŠÙ….",
+      "لا توجد خطة علاجية متاحة لهذا التقييم.",
     noSupportiveCare:
-      "Ù„Ø§ ØªÙˆØ¬Ø¯ ØªÙˆØµÙŠØ© Ø¥Ø¶Ø§ÙÙŠØ© Ù„Ù„Ø±Ø¹Ø§ÙŠØ© Ø§Ù„Ø¯Ø§Ø¹Ù…Ø©.",
+      "لا توجد توصية إضافية للرعاية الداعمة.",
     noMonitoring:
-      "Ù„Ø§ ØªÙˆØ¬Ø¯ ØªÙˆØµÙŠØ© Ù…Ø­Ø¯Ø¯Ø© Ù„Ù„Ù…Ø±Ø§Ù‚Ø¨Ø©.",
+      "لا توجد توصية محددة للمراقبة.",
     noRedFlags:
-      "Ù„Ù… ÙŠØªÙ… ØªØ­Ø¯ÙŠØ¯ Ø¹Ù„Ø§Ù…Ø§Øª Ø®Ø·Ø± Ø¥Ø¶Ø§ÙÙŠØ©.",
+      "لم يتم تحديد علامات خطر إضافية.",
     medicationSafety:
-      "Ù„Ø§ ÙŠØªÙ… Ø¹Ø±Ø¶ Ø¬Ø±Ø¹Ø§Øª Ø§Ù„Ø£Ø¯ÙˆÙŠØ© Ø¨ÙˆØ§Ø³Ø·Ø© Ù‡Ø°Ø§ Ø§Ù„Ù†Ø¸Ø§Ù….",
+      "لا يتم عرض جرعات الأدوية بواسطة هذا النظام.",
     treatmentDisclaimer:
-      "Ù‡Ø°Ù‡ Ø§Ù„Ø®Ø·Ø© Ø£Ø¯Ø§Ø© Ù„Ø¯Ø¹Ù… Ø§Ù„Ù‚Ø±Ø§Ø± Ø§Ù„Ø³Ø±ÙŠØ±ÙŠ ÙˆØªØªØ·Ù„Ø¨ Ù…Ø±Ø§Ø¬Ø¹Ø© ÙˆØ§Ø¹ØªÙ…Ø§Ø¯ Ø§Ù„Ø·Ø¨ÙŠØ¨.",
-    evidenceSource: "Ø§Ù„Ù…ØµØ¯Ø± Ø§Ù„Ø¹Ù„Ù…ÙŠ",
+      "هذه الخطة أداة لدعم القرار السريري وتتطلب مراجعة واعتماد الطبيب.",
+    evidenceSource: "المصدر العلمي",
     whoGuideline:
-      "Ø¥Ø±Ø´Ø§Ø¯Ø§Øª Ù…Ù†Ø¸Ù…Ø© Ø§Ù„ØµØ­Ø© Ø§Ù„Ø¹Ø§Ù„Ù…ÙŠØ© Ù„Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„Ø§Ù„ØªÙ‡Ø§Ø¨ Ø§Ù„Ø±Ø¦ÙˆÙŠ ÙˆØ§Ù„Ø¥Ø³Ù‡Ø§Ù„ Ù„Ø¯Ù‰ Ø§Ù„Ø£Ø·ÙØ§Ù„",
+      "إرشادات منظمة الصحة العالمية لإدارة الالتهاب الرئوي والإسهال لدى الأطفال",
 
-    assistant: "Ù…Ø³Ø§Ø¹Ø¯ Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ",
-    assistantTitle: "Ø§Ø³Ø£Ù„ PneumoCare AI",
+    assistant: "مساعد الذكاء الاصطناعي",
+    assistantTitle: "اسأل PneumoCare AI",
     assistantIntro:
-      "ÙŠÙ…ÙƒÙ†Ùƒ Ø·Ø±Ø­ Ø£Ø³Ø¦Ù„Ø© Ø­ÙˆÙ„ Ù‡Ø°Ø§ Ø§Ù„ØªÙ‚ÙŠÙŠÙ… ÙˆØ§Ù„Ø­ØµÙˆÙ„ Ø¹Ù„Ù‰ Ø´Ø±Ø­ Ù…ÙˆÙ„Ø¯ Ø¨Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ Ø¨Ù†Ø§Ø¡Ù‹ Ø¹Ù„Ù‰ Ø§Ù„Ø£Ø¯Ù„Ø© Ø§Ù„Ø³Ø±ÙŠØ±ÙŠØ© Ø§Ù„Ù…ØªØ§Ø­Ø©.",
+      "يمكنك طرح أسئلة حول هذا التقييم والحصول على شرح مولد بالذكاء الاصطناعي بناءً على الأدلة السريرية المتاحة.",
     assistantPlaceholder:
-      "Ø§Ø³Ø£Ù„ Ø¹Ù† Ù†ØªÙŠØ¬Ø© Ù‡Ø°Ø§ Ø§Ù„ØªÙ‚ÙŠÙŠÙ…...",
-    assistantSend: "Ø§Ø³Ø£Ù„ Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ",
+      "اسأل عن نتيجة هذا التقييم...",
+    assistantSend: "اسأل الذكاء الاصطناعي",
     assistantThinking:
-      "PneumoCare AI ÙŠÙÙƒØ±...",
+      "PneumoCare AI يفكر...",
     assistantWelcome:
-      "ÙŠÙ…ÙƒÙ†Ù†ÙŠ Ø´Ø±Ø­ Ù†ØªÙŠØ¬Ø© Ø§Ù„ØªÙ‚ÙŠÙŠÙ…ØŒ Ø§Ø®ØªÙ„Ø§Ù Ø§Ù„Ø£Ø¯Ù„Ø©ØŒ Ù†ØªÙŠØ¬Ø© Ø§Ù„Ø£Ø´Ø¹Ø©ØŒ Ù…Ø³ØªÙˆÙ‰ Ø§Ù„Ø®Ø·ÙˆØ±Ø©ØŒ ÙˆØ§Ù„Ø§Ø¹ØªØ¨Ø§Ø±Ø§Øª Ø§Ù„Ø³Ø±ÙŠØ±ÙŠØ©.",
-    assistantYou: "Ø£Ù†Øª",
+      "يمكنني شرح نتيجة التقييم، اختلاف الأدلة، نتيجة الأشعة، مستوى الخطورة، والاعتبارات السريرية.",
+    assistantYou: "أنت",
     assistantAI: "PneumoCare AI",
     assistantError:
-      "ØªØ¹Ø°Ø± Ø§Ù„Ø­ØµÙˆÙ„ Ø¹Ù„Ù‰ Ø±Ø¯ Ù…Ù† Ù…Ø³Ø§Ø¹Ø¯ Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ.",
+      "تعذر الحصول على رد من مساعد الذكاء الاصطناعي.",
     assistantEmpty:
-      "Ø§Ø·Ø±Ø­ Ø³Ø¤Ø§Ù„Ù‹Ø§ Ø¹Ù† ØªÙ‚ÙŠÙŠÙ… Ø§Ù„Ù…Ø±ÙŠØ¶ Ø§Ù„Ø­Ø§Ù„ÙŠ.",
+      "اطرح سؤالًا عن تقييم المريض الحالي.",
   },
 };
 
@@ -695,7 +695,7 @@ function App() {
   };
 
   const openExistingPatient = () => {
-    // Prefer current state â†’ created patient â†’ localStorage
+    // Prefer current state → created patient → localStorage
     setHistoryPatientId((prev) => {
       if (prev && String(prev).trim()) {
         return String(prev).trim();
@@ -1227,7 +1227,7 @@ function App() {
         const assistantPayload = {
           question:
             lang === "ar"
-              ? "Ù…Ø§ Ø§Ù„Ø¹Ù„Ø§Ø¬ Ø§Ù„Ù…ÙˆØµÙ‰ Ø¨Ù‡ØŸ"
+              ? "ما العلاج الموصى به؟"
               : "What treatment is recommended?",
 
           language: lang,
@@ -1780,7 +1780,7 @@ function App() {
       const fallbackAnswer =
         data?.treatment_plan
           ? lang === "ar"
-            ? "ØªÙ… Ø¥Ù†Ø´Ø§Ø¡ Ø®Ø·Ø© Ø¹Ù„Ø§Ø¬ÙŠØ© Ù…Ù†Ø¸Ù…Ø© Ø¨Ù†Ø§Ø¡Ù‹ Ø¹Ù„Ù‰ Ø§Ù„ØªÙ‚ÙŠÙŠÙ… Ø§Ù„Ø­Ø§Ù„ÙŠ. Ø±Ø§Ø¬Ø¹ Ù‚Ø³Ù… Ø®Ø·Ø© Ø§Ù„Ø¹Ù„Ø§Ø¬ Ø£Ø¯Ù†Ø§Ù‡ Ù„Ù…Ø²ÙŠØ¯ Ù…Ù† Ø§Ù„ØªÙØ§ØµÙŠÙ„."
+            ? "تم إنشاء خطة علاجية منظمة بناءً على التقييم الحالي. راجع قسم خطة العلاج أدناه لمزيد من التفاصيل."
             : "A structured treatment plan was generated from the current assessment. Review the Treatment Plan section below for details."
           : null;
 
@@ -2113,7 +2113,7 @@ function LanguageSwitch({
           onChange("ar")
         }
       >
-        Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©
+        العربية
       </button>
     </div>
   );
@@ -2174,7 +2174,7 @@ function Home({
               }
             >
               {t.start}{" "}
-              <span>â†’</span>
+              <span>→</span>
             </button>
 
             <a
@@ -2389,7 +2389,7 @@ function PatientSelection({
             </p>
 
             <span className="option-arrow">
-              {t.continue} â†’
+              {t.continue} →
             </span>
           </div>
         </button>
@@ -2401,7 +2401,7 @@ function PatientSelection({
           }
         >
           <div className="patient-option-icon">
-            â—‰
+            ◉
           </div>
 
           <div className="patient-option-content">
@@ -2418,14 +2418,14 @@ function PatientSelection({
             </p>
 
             <span className="option-arrow">
-              {t.searchPatient} â†’
+              {t.searchPatient} →
             </span>
           </div>
         </button>
       </div>
 
       <div className="patient-selection-footer">
-        <span>Ã°Å¸â€â€™</span>
+        <span>ðŸ”’</span>
         {t.privacyNote}
       </div>
 
@@ -2433,7 +2433,7 @@ function PatientSelection({
         className="text-back"
         onClick={goHome}
       >
-        â† {t.home}
+        ← {t.home}
       </button>
     </main>
   );
@@ -2569,7 +2569,7 @@ function ExistingPatient({
         >
           {loadingHistory
             ? t.loadingHistory
-            : `${t.loadHistory} â†’`}
+            : `${t.loadHistory} →`}
         </button>
 
         <button
@@ -2582,7 +2582,7 @@ function ExistingPatient({
             loadingHistory
           }
         >
-          â† {t.back}
+          ← {t.back}
         </button>
       </form>
     </main>
@@ -2644,7 +2644,7 @@ function PatientHistory({
           <strong>
             {patient?.patient_id ||
               historyPatientId ||
-              "â€”"}
+              "—"}
           </strong>
         </div>
 
@@ -2655,7 +2655,7 @@ function PatientHistory({
 
           <strong>
             {patient?.patient_name ||
-              "â€”"}
+              "—"}
           </strong>
         </div>
 
@@ -2666,7 +2666,7 @@ function PatientHistory({
 
           <strong>
             {patient?.age ??
-              "â€”"}
+              "—"}
           </strong>
         </div>
 
@@ -2738,7 +2738,7 @@ function PatientHistory({
             }}
           >
             <div className="reasoning-icon">
-              â„¹
+              ℹ
             </div>
 
             <p>
@@ -2784,7 +2784,7 @@ function PatientHistory({
           marginTop: "18px",
         }}
       >
-        â† {t.back}
+        ← {t.back}
       </button>
     </main>
   );
@@ -2964,7 +2964,7 @@ function HistoryVisitCard({
       value === undefined ||
       Number.isNaN(Number(value))
     ) {
-      return "â€”";
+      return "—";
     }
 
     const numeric = Number(value);
@@ -2981,7 +2981,7 @@ function HistoryVisitCard({
       value === undefined ||
       Number.isNaN(Number(value))
     ) {
-      return "â€”";
+      return "—";
     }
 
     const numeric = Number(value);
@@ -3024,7 +3024,7 @@ function HistoryVisitCard({
           <h5>
             {visitDate
               ? formatHistoryDate(visitDate)
-              : "â€”"}
+              : "—"}
           </h5>
         </div>
 
@@ -3068,7 +3068,7 @@ function HistoryVisitCard({
               lineHeight: 1.4,
             }}
           >
-            âš  Conflicting Results
+            ⚠ Conflicting Results
           </h4>
 
           <p
@@ -3305,7 +3305,7 @@ function HistoryVisitCard({
                   }}
                 >
                   {severityData.high_risk_flags.join(
-                    " â€¢ "
+                    " • "
                   )}
                 </span>
               )}
@@ -3343,7 +3343,7 @@ function HistoryVisitCard({
             {temperature !== null && (
               <HistoryPill
                 label={t.temperature}
-                value={`${temperature} Â°C`}
+                value={`${temperature} °C`}
               />
             )}
 
@@ -3417,8 +3417,8 @@ function HistoryVisitCard({
         }}
       >
         {expanded
-          ? "âˆ’ Hide Full Assessment"
-          : "Ã¯Â¼â€¹ View Full Assessment"}
+          ? "− Hide Full Assessment"
+          : "ï¼‹ View Full Assessment"}
       </button>
 
       {/* ========================================================
@@ -4194,7 +4194,7 @@ function NewPatient({
         >
           {creatingPatient
             ? t.creating
-            : `${t.createCaseButton} â†’`}
+            : `${t.createCaseButton} →`}
         </button>
 
         <button
@@ -4204,7 +4204,7 @@ function NewPatient({
             backToPatientSelection
           }
         >
-          â† {t.back}
+          ← {t.back}
         </button>
       </form>
     </main>
@@ -4286,7 +4286,7 @@ function Assessment(props) {
 
             <strong>
               {createdPatient.patient_name ||
-                "â€”"}
+                "—"}
             </strong>
           </div>
 
@@ -4297,7 +4297,7 @@ function Assessment(props) {
 
             <strong>
               {createdPatient.age ??
-                "â€”"}
+                "—"}
             </strong>
           </div>
 
@@ -4552,7 +4552,7 @@ function Assessment(props) {
 
             <label htmlFor="xray-upload">
               <span className="upload-icon">
-                â†‘
+                ↑
               </span>
 
               <strong>
@@ -4567,7 +4567,7 @@ function Assessment(props) {
 
           {xrayFile && (
             <div className="file-selected">
-              <span>âœ“</span>
+              <span>✓</span>
 
               <div>
                 <strong>
@@ -4622,7 +4622,7 @@ function Assessment(props) {
           >
             {runningAssessment
               ? t.running
-              : `${t.runAssessment} â†’`}
+              : `${t.runAssessment} →`}
           </button>
         </div>
       </form>
@@ -4739,7 +4739,7 @@ function Feature({
       <p>{text}</p>
 
       <span className="arrow">
-        â†’
+        →
       </span>
     </div>
   );
@@ -5054,18 +5054,18 @@ function AssessmentResult({
             <div className="source-inputs-row">
               <span>
                 {branches?.clinical_nlp?.available
-                  ? `âœ“ ${t.clinicalEvidence}`
-                  : `â€¢ ${t.clinicalEvidence}: ${t.unavailable}`}
+                  ? `✓ ${t.clinicalEvidence}`
+                  : `• ${t.clinicalEvidence}: ${t.unavailable}`}
               </span>
 
               <span>
                 {branches?.vital?.available
-                  ? `âœ“ ${t.vitalEvidence}`
-                  : `â€¢ ${t.vitalEvidence}: ${t.unavailable}`}
+                  ? `✓ ${t.vitalEvidence}`
+                  : `• ${t.vitalEvidence}: ${t.unavailable}`}
               </span>
 
               <span>
-                âœ“ {t.cbc}
+                ✓ {t.cbc}
               </span>
             </div>
 
@@ -5122,8 +5122,8 @@ function AssessmentResult({
               <span>
                 {branches?.xray?.available ||
                 xai?.prediction
-                  ? `âœ“ ${t.analyzed}`
-                  : `â€¢ ${t.unavailable}`}
+                  ? `✓ ${t.analyzed}`
+                  : `• ${t.unavailable}`}
               </span>
 
               <span>
@@ -5150,7 +5150,7 @@ function AssessmentResult({
       >
         <div className="reasoning-card">
           <div className="reasoning-icon">
-            âœ“
+            ✓
           </div>
 
           <p>
@@ -5506,7 +5506,7 @@ function AssistantCard({
         <div className="assistant-compose">
           <div className="assistant-compose-heading">
             <span className="assistant-compose-icon">
-              âœ¦
+              ✦
             </span>
 
             <div>
@@ -5560,7 +5560,7 @@ function AssistantCard({
               <span>
                 {loading
                   ? "..."
-                  : "âœ¦"}
+                  : "✦"}
               </span>
 
               {loading
@@ -5709,7 +5709,7 @@ function TreatmentPlanCard({
               title={
                 t.monitoring
               }
-              icon="â—‰"
+              icon="◉"
               items={
                 monitoring
               }
@@ -5734,7 +5734,7 @@ function TreatmentPlanCard({
         ) : (
           <div className="treatment-empty-state">
             <div className="treatment-empty-icon">
-              â„¹
+              ℹ
             </div>
 
             <div>
@@ -5755,7 +5755,7 @@ function TreatmentPlanCard({
 
         <div className="treatment-review">
           <div className="treatment-review-icon">
-            âœ“
+            ✓
           </div>
 
           <div>
@@ -5832,7 +5832,7 @@ function TreatmentBlock({
                 )}-${index}`}
               >
                 <span>
-                  â€¢
+                  •
                 </span>
 
                 <p>
@@ -6412,7 +6412,7 @@ function formatHistoryValue(
     value === null ||
     value === undefined
   ) {
-    return "â€”";
+    return "—";
   }
 
   if (
@@ -6428,4 +6428,6 @@ function formatHistoryValue(
 }
 
 export default App;
+
+
 
