@@ -955,12 +955,18 @@ async def upload_xray(
 
     try:
         file_bytes = await file.read()
+        print("=== XRAY DEBUG ===")
+        print("filename:", repr(file.filename))
+        print("content_type:", repr(file.content_type))
+        print("size:", len(file_bytes))
+        print("extension:", repr(extension))
+        print("storage_path:", repr(filename))
 
         SUPABASE_CLIENT.storage.from_(SUPABASE_BUCKET).upload(
             path=filename,
             file=file_bytes,
             file_options={
-                'content-type': file.content_type or 'application/octet-stream',
+                'content-type': 'image/jpeg' if extension in {'.jpg', '.jpeg'} else ('image/png' if extension == '.png' else 'image/webp'),
                 'upsert': 'false',
             },
         )
@@ -968,6 +974,11 @@ async def upload_xray(
         public_url = SUPABASE_CLIENT.storage.from_(SUPABASE_BUCKET).get_public_url(filename)
 
     except Exception as exc:
+        import traceback
+        print('=== XRAY UPLOAD TRACEBACK ===')
+        traceback.print_exc()
+        print('=== XRAY UPLOAD ERROR TYPE ===', type(exc).__name__)
+        print('=== XRAY UPLOAD ERROR REPR ===', repr(exc))
         raise HTTPException(status_code=500, detail=f'X-ray upload to Supabase failed: {exc}')
 
     return {
@@ -1209,7 +1220,7 @@ def run_assessment(
     xai_result: Dict[str, Any]
 
     try:
-        from web_app.backend.xray_xai import (
+        from xray_xai import (
             generate_production_gradcam
         )
 

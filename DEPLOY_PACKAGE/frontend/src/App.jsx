@@ -1,7 +1,7 @@
 ﻿import { useEffect, useState } from "react";
 import "./App.css";
 
-const API_BASE_URL = "https://deploy-package.fastapicloud.dev";
+const API_BASE_URL = "";
 
 const translations = {
   en: {
@@ -305,7 +305,7 @@ const translations = {
     vitalFeatureText:
       "ØªØ­Ù„ÙŠÙ„ Ø§Ù„Ø¹Ù„Ø§Ù…Ø§Øª Ø§Ù„Ø­ÙŠÙˆÙŠØ© ÙƒØ£Ø¯Ù„Ø© Ø³Ø±ÙŠØ±ÙŠØ© Ù…Ù†Ø¸Ù…Ø©.",
     safetyShort:
-      "Ù„Ù„Ø¯Ø¹Ù… Ø§Ù„Ø³Ø±ÙŠØ±ÙŠ ÙÙ‚Ø·. ÙŠØ¬Ø¨ Ù…Ø±Ø§Ø¬Ø¹Ø© Ø§Ù„Ù†ØªØ§Ø¦Ø¬ ÙˆØªØ£ÙƒÙŠØ¯Ù‡Ø§ Ø¨ÙˆØ§Ø³Ø·Ø© Ù…Ø®ØªØµ Ù…Ø¤Ù‡Ù„.",
+      "Ù„Ø¯Ø¹Ù… Ø§Ù„Ù‚Ø±Ø§Ø± Ø§Ù„Ø³Ø±ÙŠØ±ÙŠ ÙÙ‚Ø·. ÙŠØ¬Ø¨ Ù…Ø±Ø§Ø¬Ø¹Ø© Ø§Ù„Ù†ØªØ§Ø¦Ø¬ ÙˆØªØ£ÙƒÙŠØ¯Ù‡Ø§ Ø¨ÙˆØ§Ø³Ø·Ø© Ù…Ø®ØªØµ Ù…Ø¤Ù‡Ù„.",
     release: "Ø§Ù„Ø¥ØµØ¯Ø§Ø± Ø§Ù„Ø¥Ù†ØªØ§Ø¬ÙŠ Ø§Ù„Ø£ÙˆÙ„",
 
     patientManagement: "Ø¥Ø¯Ø§Ø±Ø© Ø§Ù„Ù…Ø±Ø¶Ù‰",
@@ -388,7 +388,7 @@ const translations = {
     cbcDesc: "Ù…Ø¹Ù„ÙˆÙ…Ø§Øª Ù…Ø®Ø¨Ø±ÙŠØ© Ø§Ø®ØªÙŠØ§Ø±ÙŠØ©.",
     wbc: "ÙƒØ±ÙŠØ§Øª Ø§Ù„Ø¯Ù… Ø§Ù„Ø¨ÙŠØ¶Ø§Ø¡ WBC",
     neutrophils: "Ø§Ù„Ø¹Ø¯Ù„Ø§Øª (%)",
-    lymphocytes: "Ø§Ù„Ø®Ù„Ø§ÙŠØ§ Ø§Ù„Ù„ÙŠÙ…ÙØ§ÙˆÙŠØ© (%)",
+    lymphocytes: "Ø§Ù„Ø®Ù„Ø§ÙŠØ§ Ø§Ù„Ù„Ù…ÙØ§ÙˆÙŠØ© (%)",
     hemoglobin: "Ø§Ù„Ù‡ÙŠÙ…ÙˆØ¬Ù„ÙˆØ¨ÙŠÙ†",
     platelets: "Ø§Ù„ØµÙØ§Ø¦Ø­ Ø§Ù„Ø¯Ù…ÙˆÙŠØ©",
     cbcNote:
@@ -445,7 +445,7 @@ const translations = {
       "ÙŠØ¹ØªÙ…Ø¯ Ø§Ù„ØªÙ‚ÙŠÙŠÙ… Ø§Ù„Ù†Ù‡Ø§Ø¦ÙŠ Ø¹Ù„Ù‰ Ø§Ù„Ù…Ø¹Ù„ÙˆÙ…Ø§Øª Ø§Ù„Ø³Ø±ÙŠØ±ÙŠØ© ÙˆØ§Ù„Ø¹Ù„Ø§Ù…Ø§Øª Ø§Ù„Ø­ÙŠÙˆÙŠØ© Ø§Ù„Ù…ØªØ§Ø­Ø©ØŒ Ø¨ÙŠÙ†Ù…Ø§ ØªÙˆÙØ± Ø£Ø´Ø¹Ø© Ø§Ù„ØµØ¯Ø± Ø¯Ù„ÙŠÙ„Ù‹Ø§ ØªØµÙˆÙŠØ±ÙŠÙ‹Ø§ Ø¥Ø¶Ø§ÙÙŠÙ‹Ø§ Ù…Ø³ØªÙ‚Ù„Ù‹Ø§.",
     conflictTitle: "Ø§Ø®ØªÙ„Ø§Ù Ù…Ù‡Ù… Ø¨ÙŠÙ† Ø§Ù„Ø£Ø¯Ù„Ø©",
     conflictText:
-      "Ù†ØªÙŠØ¬Ø© Ø£Ø´Ø¹Ø© Ø§Ù„ØµØ¯Ø± ØªØ®ØªÙ„Ù Ø¹Ù† Ø§Ù„ØªÙ‚ÙŠÙŠÙ… Ø§Ù„Ø³Ø±ÙŠØ±ÙŠ Ø§Ù„Ù†Ù‡Ø§Ø¦ÙŠ. ÙŠØ¬Ø¨ Ù…Ø±Ø§Ø¬Ø¹Ø© Ù‡Ø°Ø§ Ø§Ù„Ø§Ø®ØªÙ„Ø§Ù Ù…Ø¹ Ø§Ù„ØµÙˆØ±Ø© Ø§Ù„Ø³Ø±ÙŠØ±ÙŠØ© Ø§Ù„ÙƒØ§Ù…Ù„Ø© Ù„Ù„Ù…Ø±ÙŠØ¶.",
+      "ØªØ®ØªÙ„Ù Ù†ØªÙŠØ¬Ø© Ø£Ø´Ø¹Ø© Ø§Ù„ØµØ¯Ø± Ø¹Ù† Ø§Ù„ØªÙ‚ÙŠÙŠÙ… Ø§Ù„Ø³Ø±ÙŠØ±ÙŠ Ø§Ù„Ù†Ù‡Ø§Ø¦ÙŠ. ÙŠØ¬Ø¨ Ù…Ø±Ø§Ø¬Ø¹Ø© Ù‡Ø°Ø§ Ø§Ù„Ø§Ø®ØªÙ„Ø§Ù Ù…Ø¹ Ø§Ù„ØµÙˆØ±Ø© Ø§Ù„Ø³Ø±ÙŠØ±ÙŠØ© Ø§Ù„ÙƒØ§Ù…Ù„Ø© Ù„Ù„Ù…Ø±ÙŠØ¶.",
 
     imagingExplanation: "Ø§Ù„ØªÙØ³ÙŠØ± Ø§Ù„ØªØµÙˆÙŠØ±ÙŠ",
     imagingTitle: "ØªÙØ³ÙŠØ± Ø§Ù„Ø°ÙƒØ§Ø¡ Ø§Ù„Ø§ØµØ·Ù†Ø§Ø¹ÙŠ Ù„Ø£Ø´Ø¹Ø© Ø§Ù„ØµØ¯Ø±",
@@ -2425,7 +2425,7 @@ function PatientSelection({
       </div>
 
       <div className="patient-selection-footer">
-        <span>ðŸ”’</span>
+        <span>Ã°Å¸â€â€™</span>
         {t.privacyNote}
       </div>
 
@@ -3418,7 +3418,7 @@ function HistoryVisitCard({
       >
         {expanded
           ? "âˆ’ Hide Full Assessment"
-          : "ï¼‹ View Full Assessment"}
+          : "Ã¯Â¼â€¹ View Full Assessment"}
       </button>
 
       {/* ========================================================
@@ -3611,15 +3611,7 @@ function HistoryVisitCard({
                   gap: "10px",
                   marginTop: "12px",
                 }}
-              >
-                {fusion.engine && (
-                  <HistoryPill
-                    label="Engine"
-                    value={fusion.engine}
-                  />
-                )}
-
-                {clinicalProbability !== null && (
+              >{clinicalProbability !== null && (
                   <HistoryPill
                     label="Clinical Probability"
                     value={formatProbabilityExact(
@@ -3644,45 +3636,7 @@ function HistoryVisitCard({
                       fusionProbability
                     )}
                   />
-                )}
-
-                {threshold !== null && (
-                  <HistoryPill
-                    label="Decision Threshold"
-                    value={String(threshold)}
-                  />
-                )}
-              </div>
-
-              {fusion.weights &&
-                typeof fusion.weights ===
-                  "object" && (
-                  <div
-                    style={{
-                      marginTop: "10px",
-                      display: "flex",
-                      flexWrap: "wrap",
-                      gap: "10px",
-                    }}
-                  >
-                    {Object.entries(
-                      fusion.weights
-                    ).map(
-                      ([key, value]) => (
-                        <HistoryPill
-                          key={key}
-                          label={`${formatHistoryLabel(
-                            key
-                          )} Weight`}
-                          value={formatProbability(
-                            value
-                          )}
-                        />
-                      )
-                    )}
-                  </div>
-                )}
-            </div>
+                )}</div></div>
           )}
 
           {/* ----------------------------------------------------
@@ -6474,5 +6428,4 @@ function formatHistoryValue(
 }
 
 export default App;
-
 

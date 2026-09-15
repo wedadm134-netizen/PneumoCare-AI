@@ -17,7 +17,7 @@ from huggingface_hub import hf_hub_download
 # ============================================================
 
 PROJECT = os.path.dirname(os.path.abspath(__file__))
-MODEL_ROOT = PROJECT
+MODEL_ROOT = os.path.dirname(PROJECT)
 
 DEVICE = torch.device("cpu")
 
