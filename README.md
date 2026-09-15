@@ -1,4 +1,4 @@
-﻿CAPGuard AI
+CAPGuard AI
 ===========
 
 Dual-Evidence Clinical Fusion for Early Pediatric CAP Detection
@@ -20,9 +20,9 @@ Weighted probability fusion
 Final Fusion
 ------------
 
-VITAL-FUSE weight : 0.78
-CLIN-NOTE weight  : 0.22
-Threshold         : 0.35
+VITAL-FUSE weight : 0.27
+CLIN-NOTE weight  : 0.73
+Threshold         : 0.665
 
 Final Test Results
 ------------------
